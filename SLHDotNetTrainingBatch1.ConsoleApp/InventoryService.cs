@@ -36,7 +36,10 @@ namespace SLHDotNetTrainingBatch1.ConsoleApp
                 goto BeforeQuantity;
             }
 
-            Data.ProductId++;
+            //Data.ProductId++;
+
+            int no = Data.Products.Max(x => x.Id) + 1; // 3+ 1 = 4
+            Data.ProductId = no;
 
             string productCode = "P" + Data.ProductId.ToString().PadLeft(3, '0');
 
@@ -91,7 +94,30 @@ namespace SLHDotNetTrainingBatch1.ConsoleApp
 
         public void DeleteProduct()
         {
+        BeforeProductCode:
+            Console.Write("Input Product Code: ");
+            string code = Console.ReadLine()!;
+            var product = Data.Products.FirstOrDefault(p => p.Code == code);
+            if (product is null)
+            {
+                Console.WriteLine("Product Not Found.");
+                goto BeforeProductCode;
+            }
 
+            Console.WriteLine("Product Found.");
+            Console.WriteLine($"Code: {product.Code}, Name: {product.Name}, Quantity: {product.Quantity}");
+
+            Console.WriteLine("Are you sure want to delete? (Y/N)");
+            string confirm = Console.ReadLine()!;
+            if (confirm.ToUpper() == "Y")
+            {
+                Data.Products.Remove(product);
+                Console.WriteLine("Product Deleted Successfully.");
+            }
+            else
+            {
+                Console.WriteLine("Product Not Deleted.");
+            }
         }
     }
 }
