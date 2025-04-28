@@ -42,7 +42,13 @@ Console.WriteLine("Hello, World!");
 //connection.Close();
 
 HomeworkService service = new HomeworkService();
-service.Read();
+//service.Read();
+//service.Create();
+//service.Login();
+service.Update();
+
+// Ctrl + K, C
+// Ctrl + K, U
 //service.Detail(1);
 
 Console.ReadLine();
