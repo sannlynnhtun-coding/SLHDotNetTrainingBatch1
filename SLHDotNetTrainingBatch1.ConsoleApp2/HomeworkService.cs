@@ -198,5 +198,29 @@ Password = @Password";
 
             connection.Close();
         }
+
+        public void LoginWithStoredProcedure()
+        {
+            Console.Write("Enter UserName: ");
+            string userName = Console.ReadLine()!;
+
+            Console.Write("Enter Password: ");
+            string password = Console.ReadLine()!;
+
+            string query = @$"Sp_Login";
+
+            SqlConnection connection = new SqlConnection(_sqlConnectionStringBuilder.ConnectionString);
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@UserName", userName);
+            cmd.Parameters.AddWithValue("@Password", password);
+
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            connection.Close();
+        }
     }
 }

@@ -45,7 +45,8 @@ HomeworkService service = new HomeworkService();
 //service.Read();
 //service.Create();
 //service.Login();
-service.Update();
+//service.Update();
+service.LoginWithStoredProcedure();
 
 // Ctrl + K, C
 // Ctrl + K, U
