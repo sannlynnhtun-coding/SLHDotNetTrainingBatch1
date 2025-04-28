@@ -37,7 +37,6 @@ namespace SLHDotNetTrainingBatch1.ConsoleApp2
                 DataRow dr = dt.Rows[i];
                 //DataColumn dc = dt.Columns[0];
                 //DataColumn dc2 = dt.Columns["No"];
-
                 Console.WriteLine(dr["No"]);
                 Console.WriteLine(dr["Name"]);
                 Console.WriteLine(dr["GitHubUserName"]);

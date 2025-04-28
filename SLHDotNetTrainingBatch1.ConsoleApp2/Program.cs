@@ -41,12 +41,15 @@ Console.WriteLine("Hello, World!");
 
 //connection.Close();
 
-HomeworkService service = new HomeworkService();
+//HomeworkService service = new HomeworkService();
 //service.Read();
 //service.Create();
 //service.Login();
 //service.Update();
-service.LoginWithStoredProcedure();
+//service.LoginWithStoredProcedure();
+
+LoginDapperService service = new LoginDapperService();
+service.Read();
 
 // Ctrl + K, C
 // Ctrl + K, U
