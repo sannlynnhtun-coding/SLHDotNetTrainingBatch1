@@ -16,4 +16,18 @@
 - RestSharp
 - Refit
 - Console App + API
-- 
+
+Login Form
+Username
+Password
+Login
+	- Get From Textbox (trim)
+	- Read From Database
+	- ADO.NET (CRUD)
+Cancel
+
+Database
+- Table
+- User
+- Username, Password
+- Data Fill
