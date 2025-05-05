@@ -10,6 +10,9 @@ namespace SLHDotNetTrainingBatch1.WinFormsApp
         {
             InitializeComponent();
             _sqlService = new SqlService();
+
+            txtUsername.Text = "sann";
+            txtPassword.Text = "123";
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -67,6 +70,21 @@ namespace SLHDotNetTrainingBatch1.WinFormsApp
             }
 
             MessageBox.Show("Login successful.");
+
+            AppSetting.CurrentUser = Convert.ToInt32(dt.Rows[0]["Id"]);
+
+            txtUsername.Clear();
+            txtPassword.Clear();
+
+            this.Hide();
+
+            FrmMenu frm = new FrmMenu();
+            //frm.Show();
+            frm.ShowDialog();
+
+            this.Show();
+
+            txtUsername.Focus();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

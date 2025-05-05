@@ -120,7 +120,7 @@
             Margin = new Padding(4);
             Name = "FrmLogin";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Login";
             ResumeLayout(false);
             PerformLayout();
         }
