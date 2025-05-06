@@ -16,6 +16,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Win
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.ConsoleApp3", "SLHDotNetTrainingBatch1.ConsoleApp3\SLHDotNetTrainingBatch1.ConsoleApp3.csproj", "{1CA406F4-8B7D-4D84-B215-0B89D22F3DB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Shared", "SLHDotNetTrainingBatch1.Shared\SLHDotNetTrainingBatch1.Shared.csproj", "{29D7F179-B845-4480-91C1-45EAF12841C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.ConsoleApp4", "SLHDotNetTrainingBatch1.ConsoleApp4\SLHDotNetTrainingBatch1.ConsoleApp4.csproj", "{2271780A-5DE8-44F4-B586-0F14E2C0B4DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.ConsoleApp5", "SLHDotNetTrainingBatch1.ConsoleApp5\SLHDotNetTrainingBatch1.ConsoleApp5.csproj", "{0805CD58-0AFA-4E17-9D4C-5D3C42DE505C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Database", "SLHDotNetTrainingBatch1.Database\SLHDotNetTrainingBatch1.Database.csproj", "{021798E0-6B45-41DF-8C73-A8F559E6636A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +46,22 @@ Global
 		{1CA406F4-8B7D-4D84-B215-0B89D22F3DB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CA406F4-8B7D-4D84-B215-0B89D22F3DB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CA406F4-8B7D-4D84-B215-0B89D22F3DB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29D7F179-B845-4480-91C1-45EAF12841C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29D7F179-B845-4480-91C1-45EAF12841C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29D7F179-B845-4480-91C1-45EAF12841C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29D7F179-B845-4480-91C1-45EAF12841C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2271780A-5DE8-44F4-B586-0F14E2C0B4DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2271780A-5DE8-44F4-B586-0F14E2C0B4DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2271780A-5DE8-44F4-B586-0F14E2C0B4DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2271780A-5DE8-44F4-B586-0F14E2C0B4DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0805CD58-0AFA-4E17-9D4C-5D3C42DE505C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0805CD58-0AFA-4E17-9D4C-5D3C42DE505C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0805CD58-0AFA-4E17-9D4C-5D3C42DE505C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0805CD58-0AFA-4E17-9D4C-5D3C42DE505C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{021798E0-6B45-41DF-8C73-A8F559E6636A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{021798E0-6B45-41DF-8C73-A8F559E6636A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{021798E0-6B45-41DF-8C73-A8F559E6636A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{021798E0-6B45-41DF-8C73-A8F559E6636A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
