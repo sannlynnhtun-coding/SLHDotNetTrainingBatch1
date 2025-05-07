@@ -2,13 +2,13 @@
 
 - [x] C# Basic
 - [x] SQL Basic
-- Console App
-- Console App + Db (Memory Database)
-- Console App + Db (SQL Server) 
-	- ADO.NET (CRUD) - Old School
-	- Dapper (CRUD) ORM - Micro ORM (query)
-	- EFCore (CRUD) ORM - Full ORM (no query)
-- Windows Forms
+- [x] Console App
+- [x] Console App + Db (Memory Database)
+- [x] Console App + Db (SQL Server) 
+	- [x] ADO.NET (CRUD) - Old School
+	- [x] Dapper (CRUD) ORM - Micro ORM (query)
+	- [x] EFCore (CRUD) ORM - Full ORM (no query)
+- [x] Windows Forms
 - Postman
 - ASP.NET Core Web API
 - Logic

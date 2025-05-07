@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Database", "SLHDotNetTrainingBatch1.Database\SLHDotNetTrainingBatch1.Database.csproj", "{021798E0-6B45-41DF-8C73-A8F559E6636A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.WebApi", "SLHDotNetTrainingBatch1.WebApi\SLHDotNetTrainingBatch1.WebApi.csproj", "{26DEA88D-8141-4310-9601-53E4B1B63C52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{021798E0-6B45-41DF-8C73-A8F559E6636A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{021798E0-6B45-41DF-8C73-A8F559E6636A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{021798E0-6B45-41DF-8C73-A8F559E6636A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26DEA88D-8141-4310-9601-53E4B1B63C52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26DEA88D-8141-4310-9601-53E4B1B63C52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26DEA88D-8141-4310-9601-53E4B1B63C52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26DEA88D-8141-4310-9601-53E4B1B63C52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
