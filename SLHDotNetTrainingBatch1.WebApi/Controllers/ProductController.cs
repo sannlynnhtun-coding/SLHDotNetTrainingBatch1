@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using SLHDotNetTrainingBatch1.Shared;
 using SLHDotNetTrainingBatch1.WebApi.Models;
+using SLHDotNetTrainingBatch1.WebApi.Services;
 
 namespace SLHDotNetTrainingBatch1.WebApi.Controllers
 {
@@ -11,87 +12,37 @@ namespace SLHDotNetTrainingBatch1.WebApi.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly DapperService _dapperService;
-
+        private readonly ProductService _productService;
         public ProductController()
         {
-            SqlConnectionStringBuilder _sqlConnectionStringBuilder = new SqlConnectionStringBuilder()
-            {
-                DataSource = ".",
-                InitialCatalog = "DotNetTrainingBatch1",
-                UserID = "sa",
-                Password = "sasa@123",
-                TrustServerCertificate = true
-            };
-            _dapperService = new DapperService(_sqlConnectionStringBuilder);
+            _productService = new ProductService();
         }
 
         [HttpGet]
         public IActionResult GetProducts()
         {
-            var lst = _dapperService.Query<ProductModel>("select * from tbl_product");
-            var data = new
-            {
-                IsSuccess = true,
-                Message = "Success.",
-                Data = lst,
-            };
-            return Ok(data);
+            var model = _productService.GetProducts();
+            return Ok(model);
         }
 
         [HttpGet("Edit/{id}")]
         [HttpGet("{id}")]
         public IActionResult GetProduct(int id)
         {
-            string query = "select * from tbl_product where ProductId=@ProductId";
-            var lst = _dapperService.Query<ProductModel>(query, new
+            var model = _productService.GetProductById(id);
+            if (!model.IsSuccess)
             {
-                ProductId = id
-            });
-            if (lst.Count == 0)
-            {
-                return NotFound(new
-                {
-                    IsSuccess = false,
-                    Message = "Product not found."
-                });
+                return NotFound(model);
             }
-            var data = new
-            {
-                IsSuccess = true,
-                Message = "Success.",
-                Data = lst[0],
-            };
-            return Ok(data);
+            return Ok(model);
         }
 
         [HttpPost]
         public IActionResult CreateProduct([FromBody] ProductModel product)
         {
-            product.CreatedDateTime = DateTime.Now;
-            product.CreatedBy = 1;
-            string query = @"
-                insert into tbl_product(
-                    ProductName, 
-                    ProductCategoryId, 
-                    Price, 
-                    Quantity, 
-                    CreatedDateTime, 
-                    CreatedBy)
-                values(
-                    @ProductName, 
-                    @ProductCategoryId, 
-                    @Price, 
-                    @Quantity, 
-                    @CreatedDateTime, 
-                    @CreatedBy)";
-            int result =_dapperService.Execute(query, product);
-            var data = new
-            {
-                IsSuccess = result > 0,
-                Message = result > 0 ? "Success." : "Fail.",
-            };
-            return Ok(data);
+            Console.WriteLine("CreateProduct => " + product.ToJson());
+            var model = _productService.CreateProduct(product);
+            return Ok(_productService.CreateProduct(product));
         }
 
         [HttpPut]
@@ -100,10 +51,11 @@ namespace SLHDotNetTrainingBatch1.WebApi.Controllers
             return Ok("CreateOrUpdateProduct");
         }
 
-        [HttpPatch]
-        public IActionResult UpdateProduct()
+        [HttpPatch("{productId}")]
+        public IActionResult UpdateProduct(int productId, [FromBody] ProductModel product)
         {
-            return Ok("UpdateProduct");
+            var model = _productService.UpdateProduct(productId, product);
+            return Ok(model);
         }
 
         [HttpDelete]
