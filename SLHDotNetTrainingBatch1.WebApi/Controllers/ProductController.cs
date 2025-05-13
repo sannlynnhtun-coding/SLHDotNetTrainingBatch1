@@ -12,16 +12,24 @@ namespace SLHDotNetTrainingBatch1.WebApi.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ProductService _productService;
-        public ProductController()
+        private readonly IProductService _productService;
+
+        public ProductController(IProductService productService)
         {
-            _productService = new ProductService();
+            _productService = productService;
         }
 
         [HttpGet]
         public IActionResult GetProducts()
         {
             var model = _productService.GetProducts();
+            return Ok(model);
+        }
+
+        [HttpGet("{pageNo}/{pageSize}")]
+        public IActionResult GetProducts(int pageNo, int pageSize)
+        {
+            var model = _productService.GetProducts(pageNo, pageSize);
             return Ok(model);
         }
 

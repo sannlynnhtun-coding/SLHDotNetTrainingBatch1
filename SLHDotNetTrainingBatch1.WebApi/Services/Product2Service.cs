@@ -9,11 +9,11 @@ namespace SLHDotNetTrainingBatch1.WebApi.Services
     // Request => Request Model
     // Response => Model
 
-    public class ProductService : IProductService
+    public class Product2Service : IProductService
     {
         private readonly IDbV2Service _dapperService;
 
-        public ProductService(IDbV2Service dapperService)
+        public Product2Service(IDbV2Service dapperService)
         {
             _dapperService = dapperService;
         }
@@ -22,26 +22,6 @@ namespace SLHDotNetTrainingBatch1.WebApi.Services
         public ResponseModel GetProducts()
         {
             var lst = _dapperService.Query<ProductModel>("select * from tbl_product");
-            var model = new ResponseModel
-            {
-                IsSuccess = true,
-                Message = "Success.",
-                Data = lst,
-            };
-            return model;
-        }
-
-        public ResponseModel GetProducts(int pageNo, int pageSize)
-        {
-            string query = @"select * from Products
-                            ORDER BY ProductID
-                            OFFSET ((@PageNo - 1) * @PageSize) ROWS FETCH NEXT @PageSize ROWS ONLY";
-            var lst = _dapperService.Query<ProductModel>(query,
-                new
-                {
-                    PageNo = pageNo,
-                    PageSize = pageSize 
-                });
             var model = new ResponseModel
             {
                 IsSuccess = true,
@@ -184,6 +164,11 @@ namespace SLHDotNetTrainingBatch1.WebApi.Services
                 Message = result > 0 ? "Success." : "Fail.",
             };
             return model;
+        }
+
+        public ResponseModel GetProducts(int pageNo, int pageSize)
+        {
+            throw new NotImplementedException();
         }
     }
 }

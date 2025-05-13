@@ -5,11 +5,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace SLHDotNetTrainingBatch1.Shared;
 
-public class DapperService : IDbV2Service
+public class Dapper2Service : IDbV2Service
 {
     private readonly SqlConnectionStringBuilder _sqlConnectionStringBuilder;
 
-    public DapperService(IConfiguration configuration)
+    public Dapper2Service(IConfiguration configuration)
     {
         _sqlConnectionStringBuilder = new SqlConnectionStringBuilder(configuration.GetConnectionString("DbConnecton"));
     }
