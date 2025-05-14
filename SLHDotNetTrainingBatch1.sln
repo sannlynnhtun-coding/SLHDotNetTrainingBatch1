@@ -26,6 +26,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.WebApi", "SLHDotNetTrainingBatch1.WebApi\SLHDotNetTrainingBatch1.WebApi.csproj", "{26DEA88D-8141-4310-9601-53E4B1B63C52}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project1", "Project1", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Project1.Databases", "SLHDotNetTrainingBatch1.Project1.Databases\SLHDotNetTrainingBatch1.Project1.Databases.csproj", "{1F798552-BD1B-40DB-97AD-C4CFB47031A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Project1.WebApi", "SLHDotNetTrainingBatch1.Project1.WebApi\SLHDotNetTrainingBatch1.Project1.WebApi.csproj", "{EF376376-7FBC-41DC-93A7-6B6AF31601D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Project1.Domain", "SLHDotNetTrainingBatch1.Project1.Domain\SLHDotNetTrainingBatch1.Project1.Domain.csproj", "{4B542791-7F5E-4666-A486-E25F0A841384}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project2", "Project2", "{4E55322D-D9C1-4D69-B490-B0E7B236C6ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Project2.ConsoleApp", "SLHDotNetTrainingBatch1.Project2.ConsoleApp\SLHDotNetTrainingBatch1.Project2.ConsoleApp.csproj", "{8E60C594-5318-4CFA-9642-0342134DE5AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,9 +80,31 @@ Global
 		{26DEA88D-8141-4310-9601-53E4B1B63C52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26DEA88D-8141-4310-9601-53E4B1B63C52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26DEA88D-8141-4310-9601-53E4B1B63C52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F798552-BD1B-40DB-97AD-C4CFB47031A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F798552-BD1B-40DB-97AD-C4CFB47031A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F798552-BD1B-40DB-97AD-C4CFB47031A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F798552-BD1B-40DB-97AD-C4CFB47031A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF376376-7FBC-41DC-93A7-6B6AF31601D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF376376-7FBC-41DC-93A7-6B6AF31601D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF376376-7FBC-41DC-93A7-6B6AF31601D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF376376-7FBC-41DC-93A7-6B6AF31601D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B542791-7F5E-4666-A486-E25F0A841384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B542791-7F5E-4666-A486-E25F0A841384}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B542791-7F5E-4666-A486-E25F0A841384}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B542791-7F5E-4666-A486-E25F0A841384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E60C594-5318-4CFA-9642-0342134DE5AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E60C594-5318-4CFA-9642-0342134DE5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E60C594-5318-4CFA-9642-0342134DE5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E60C594-5318-4CFA-9642-0342134DE5AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1F798552-BD1B-40DB-97AD-C4CFB47031A5} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{EF376376-7FBC-41DC-93A7-6B6AF31601D8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{4B542791-7F5E-4666-A486-E25F0A841384} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{8E60C594-5318-4CFA-9642-0342134DE5AE} = {4E55322D-D9C1-4D69-B490-B0E7B236C6ED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBBEB5F0-9B32-42E2-ADCC-EE610898DA60}

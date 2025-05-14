@@ -42,4 +42,16 @@ dotnet ef dbcontext scaffold "Server=.;Database=Northwind;User Id=sa;Password=sa
 
 dotnet tool install --global dotnet-ef
 
+dotnet ef dbcontext scaffold "Server=.;Database=DotNetTrainingBatch1;User Id=sa;Password=sasa@123;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models -c AppDbContext -f
+
+
 https://github.com/microsoft/sql-server-samples/blob/master/samples/databases/northwind-pubs/instnwnd.sql
+
+- Database > Table
+- Class Libary > EFCore Install > Cmd
+- API Project > Add Class Libary > EFCore (DI)
+- API Project > Create Controller > CRUD using AppContext
+- Class Libary > Domain > BlogService > API Project > Add > Register (builder.Servcices.AddScoped<BlogService>();))
+
+
+> Database > Domain > API Project (DI)
