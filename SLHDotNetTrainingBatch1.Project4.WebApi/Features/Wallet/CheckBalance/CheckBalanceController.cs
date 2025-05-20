@@ -81,5 +81,19 @@ namespace SLHDotNetTrainingBatch1.Project4.WebApi.Features.Wallet.CheckBalance
         Result:
             return Ok(model);
         }
+
+        [HttpGet("{mobileNo}")]
+        public IActionResult Execute(string mobileNo)
+        {
+            var lst = _appDbContext.TblTransactions.Where(x =>
+               (
+                   x.FromMobileNo == mobileNo ||
+                   x.ToMobileNo == mobileNo)
+               )
+               .OrderByDescending(x => x.TransactionDate)
+               .Take(5)
+               .ToList();
+            return Ok(lst);
+        }
     }
 }
