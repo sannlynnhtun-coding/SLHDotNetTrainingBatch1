@@ -2,6 +2,7 @@
 
 // See https://aka.ms/new-console-template for more information
 using Newtonsoft.Json;
+using RestSharp;
 using System.Text;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -53,6 +54,18 @@ if (Task2.Result.IsSuccessStatusCode)
 // Client (HttpClient) to Server (API)
 
 Console.ReadLine();
+
+RestClient restClient = new RestClient();
+RestRequest request = new RestRequest($"https://localhost:7084/api/CheckBalance/{mobileNo}", RestSharp.Method.Get);
+await restClient.ExecuteAsync(request);
+
+RestRequest request1 = new RestRequest($"https://localhost:7084/api/CheckBalance", RestSharp.Method.Post);
+request1.AddJsonBody(model);
+var response3 = await restClient.ExecuteAsync(request1);
+if (response3.IsSuccessStatusCode)
+{
+    var jsonStr3 = response3.Content;
+}
 
 public class CheckBalanceRequestModel
 {
