@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Hello World</h1>
+    <h2>heehee</h2>
+
+    <input type="text" id="txtData">
+    <button onclick="clickFunction()">Click</button>
+    <button onclick="readFunction()">Read</button>
+    <button onclick="deleteFunction()">Delete</button>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="plugins/jquery-3.7.1.min.js"></script>
+
+    <script>
+        function clickFunction() {
+            // const data = document.getElementById('txtData').value;
+
+            const data = $('#txtData').val();
+
+            localStorage.setItem("name", data);
+
+            alert('hello ' + data);
+            $('#txtData').val('');
+        }
+
+        function readFunction() {
+            const data = localStorage.getItem("name");
+            $('#txtData').val(data);
+        }
+
+        function deleteFunction() {
+            const isDelete = confirm('are you sure want to delete?');
+            if(!isDelete) return;
+
+            localStorage.removeItem('name');
+        }
+    </script>
+</body>
+
+</html>
