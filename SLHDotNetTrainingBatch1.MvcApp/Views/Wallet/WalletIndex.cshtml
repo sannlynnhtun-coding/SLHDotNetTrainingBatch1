@@ -1,0 +1,34 @@
+﻿@model List<WalletModel>
+@{
+    int count = 0;
+}
+
+<h1>Wallet Users (@Model.Count)</h1>
+
+<a class="btn btn-outline-success" href="/Wallet/Create">Create</a>
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th></th>
+            <th>No.</th>
+            <th>User Name</th>
+            <th>Mobile No</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @* count++; *@
+            <tr>
+                @* <td>@count</td> *@
+                <td>
+                    <a href="/Wallet/Edit/@item.WalletId" class="btn btn-outline-warning">Edit</a>
+                </td>
+                <td>@(++count)</td>
+                <td>@item.WalletUserName</td>
+                <td>@item.MobileNo</td>
+            </tr>
+        }
+    </tbody>
+</table>
