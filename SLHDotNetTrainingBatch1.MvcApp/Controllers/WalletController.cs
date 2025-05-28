@@ -115,6 +115,33 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
 
             return RedirectToAction("Index");
         }
+
+
+        [HttpGet]
+        [ActionName("Delete")]
+        public async Task<IActionResult> WalletDelete(int id)
+        {
+            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            db.Open();
+
+            string query = @"SELECT [WalletId]
+      ,[WalletUserName]
+      ,[FullName]
+      ,[MobileNo]
+      ,[Balance]
+  FROM [dbo].[Tbl_Wallet]
+  where WalletId = @WalletId";
+            //var model = await db.QueryFirstOrDefaultAsync<WalletModel>(query, new { WalletId = id });
+
+            var result = 1;
+            if (result == 0)
+            {
+                TempData["IsSuccess"] = false;
+                TempData["Message"] = "No data found.";
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
     }
 
     public class WalletModel
