@@ -3,62 +3,64 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.ConsoleApp", "SLHDotNetTrainingBatch1.ConsoleApp\SLHDotNetTrainingBatch1.ConsoleApp.csproj", "{B9BFC915-25EA-4D7B-AEFC-D1E6A22C0306}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.ConsoleApp", "SLHDotNetTrainingBatch1.ConsoleApp\SLHDotNetTrainingBatch1.ConsoleApp.csproj", "{B9BFC915-25EA-4D7B-AEFC-D1E6A22C0306}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.ConsoleApp2", "SLHDotNetTrainingBatch1.ConsoleApp2\SLHDotNetTrainingBatch1.ConsoleApp2.csproj", "{C887BFD0-8C54-40A4-86A3-48C0C600F9FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.ConsoleApp2", "SLHDotNetTrainingBatch1.ConsoleApp2\SLHDotNetTrainingBatch1.ConsoleApp2.csproj", "{C887BFD0-8C54-40A4-86A3-48C0C600F9FB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.WinFormsApp", "SLHDotNetTrainingBatch1.WinFormsApp\SLHDotNetTrainingBatch1.WinFormsApp.csproj", "{063F54BE-D4EB-4B27-9FE5-7918FA97314A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.WinFormsApp", "SLHDotNetTrainingBatch1.WinFormsApp\SLHDotNetTrainingBatch1.WinFormsApp.csproj", "{063F54BE-D4EB-4B27-9FE5-7918FA97314A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.ConsoleApp3", "SLHDotNetTrainingBatch1.ConsoleApp3\SLHDotNetTrainingBatch1.ConsoleApp3.csproj", "{1CA406F4-8B7D-4D84-B215-0B89D22F3DB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.ConsoleApp3", "SLHDotNetTrainingBatch1.ConsoleApp3\SLHDotNetTrainingBatch1.ConsoleApp3.csproj", "{1CA406F4-8B7D-4D84-B215-0B89D22F3DB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Shared", "SLHDotNetTrainingBatch1.Shared\SLHDotNetTrainingBatch1.Shared.csproj", "{29D7F179-B845-4480-91C1-45EAF12841C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.Shared", "SLHDotNetTrainingBatch1.Shared\SLHDotNetTrainingBatch1.Shared.csproj", "{29D7F179-B845-4480-91C1-45EAF12841C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.ConsoleApp4", "SLHDotNetTrainingBatch1.ConsoleApp4\SLHDotNetTrainingBatch1.ConsoleApp4.csproj", "{2271780A-5DE8-44F4-B586-0F14E2C0B4DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.ConsoleApp4", "SLHDotNetTrainingBatch1.ConsoleApp4\SLHDotNetTrainingBatch1.ConsoleApp4.csproj", "{2271780A-5DE8-44F4-B586-0F14E2C0B4DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.ConsoleApp5", "SLHDotNetTrainingBatch1.ConsoleApp5\SLHDotNetTrainingBatch1.ConsoleApp5.csproj", "{0805CD58-0AFA-4E17-9D4C-5D3C42DE505C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.ConsoleApp5", "SLHDotNetTrainingBatch1.ConsoleApp5\SLHDotNetTrainingBatch1.ConsoleApp5.csproj", "{0805CD58-0AFA-4E17-9D4C-5D3C42DE505C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Database", "SLHDotNetTrainingBatch1.Database\SLHDotNetTrainingBatch1.Database.csproj", "{021798E0-6B45-41DF-8C73-A8F559E6636A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.Database", "SLHDotNetTrainingBatch1.Database\SLHDotNetTrainingBatch1.Database.csproj", "{021798E0-6B45-41DF-8C73-A8F559E6636A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.WebApi", "SLHDotNetTrainingBatch1.WebApi\SLHDotNetTrainingBatch1.WebApi.csproj", "{26DEA88D-8141-4310-9601-53E4B1B63C52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.WebApi", "SLHDotNetTrainingBatch1.WebApi\SLHDotNetTrainingBatch1.WebApi.csproj", "{26DEA88D-8141-4310-9601-53E4B1B63C52}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project1", "Project1", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Project1.Databases", "SLHDotNetTrainingBatch1.Project1.Databases\SLHDotNetTrainingBatch1.Project1.Databases.csproj", "{1F798552-BD1B-40DB-97AD-C4CFB47031A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.Project1.Databases", "SLHDotNetTrainingBatch1.Project1.Databases\SLHDotNetTrainingBatch1.Project1.Databases.csproj", "{1F798552-BD1B-40DB-97AD-C4CFB47031A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Project1.WebApi", "SLHDotNetTrainingBatch1.Project1.WebApi\SLHDotNetTrainingBatch1.Project1.WebApi.csproj", "{EF376376-7FBC-41DC-93A7-6B6AF31601D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.Project1.WebApi", "SLHDotNetTrainingBatch1.Project1.WebApi\SLHDotNetTrainingBatch1.Project1.WebApi.csproj", "{EF376376-7FBC-41DC-93A7-6B6AF31601D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Project1.Domain", "SLHDotNetTrainingBatch1.Project1.Domain\SLHDotNetTrainingBatch1.Project1.Domain.csproj", "{4B542791-7F5E-4666-A486-E25F0A841384}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.Project1.Domain", "SLHDotNetTrainingBatch1.Project1.Domain\SLHDotNetTrainingBatch1.Project1.Domain.csproj", "{4B542791-7F5E-4666-A486-E25F0A841384}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project2", "Project2", "{4E55322D-D9C1-4D69-B490-B0E7B236C6ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Project2.ConsoleApp", "SLHDotNetTrainingBatch1.Project2.ConsoleApp\SLHDotNetTrainingBatch1.Project2.ConsoleApp.csproj", "{8E60C594-5318-4CFA-9642-0342134DE5AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.Project2.ConsoleApp", "SLHDotNetTrainingBatch1.Project2.ConsoleApp\SLHDotNetTrainingBatch1.Project2.ConsoleApp.csproj", "{8E60C594-5318-4CFA-9642-0342134DE5AE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project3", "Project3", "{61E3AD15-E924-4322-989D-4493BBE16C95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Project3.Api", "SLHDotNetTrainingBatch1.Project3.Api\SLHDotNetTrainingBatch1.Project3.Api.csproj", "{1A0481B9-807C-417D-B734-BCD6F7C5EE52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.Project3.Api", "SLHDotNetTrainingBatch1.Project3.Api\SLHDotNetTrainingBatch1.Project3.Api.csproj", "{1A0481B9-807C-417D-B734-BCD6F7C5EE52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Project3.Databases", "SLHDotNetTrainingBatch1.Project3.Databases\SLHDotNetTrainingBatch1.Project3.Databases.csproj", "{F033904D-DFA3-4760-AEE3-412DAC0492A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.Project3.Databases", "SLHDotNetTrainingBatch1.Project3.Databases\SLHDotNetTrainingBatch1.Project3.Databases.csproj", "{F033904D-DFA3-4760-AEE3-412DAC0492A7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project4", "Project4", "{2AEECE45-CCD1-43DB-A424-3B8A9B2F015A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Project4.WebApi", "SLHDotNetTrainingBatch1.Project4.WebApi\SLHDotNetTrainingBatch1.Project4.WebApi.csproj", "{B3FD4AC7-180F-429E-BAAA-4F6106D9918D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.Project4.WebApi", "SLHDotNetTrainingBatch1.Project4.WebApi\SLHDotNetTrainingBatch1.Project4.WebApi.csproj", "{B3FD4AC7-180F-429E-BAAA-4F6106D9918D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Project.Databases", "SLHDotNetTrainingBatch1.Project.Databases\SLHDotNetTrainingBatch1.Project.Databases.csproj", "{B6DCCEAF-878F-4AC8-B129-D8528CE01C7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.Project.Databases", "SLHDotNetTrainingBatch1.Project.Databases\SLHDotNetTrainingBatch1.Project.Databases.csproj", "{B6DCCEAF-878F-4AC8-B129-D8528CE01C7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.MinimalApi", "SLHDotNetTrainingBatch1.MinimalApi\SLHDotNetTrainingBatch1.MinimalApi.csproj", "{F37F5D9B-E091-4C59-BE21-C1012C8F9CD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.MinimalApi", "SLHDotNetTrainingBatch1.MinimalApi\SLHDotNetTrainingBatch1.MinimalApi.csproj", "{F37F5D9B-E091-4C59-BE21-C1012C8F9CD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch.Project4.ConsoleApp", "SLHDotNetTrainingBatch.Project4.ConsoleApp\SLHDotNetTrainingBatch.Project4.ConsoleApp.csproj", "{FD9D3610-D35A-453D-9222-AB404537640B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch.Project4.ConsoleApp", "SLHDotNetTrainingBatch.Project4.ConsoleApp\SLHDotNetTrainingBatch.Project4.ConsoleApp.csproj", "{FD9D3610-D35A-453D-9222-AB404537640B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.MvcApp", "SLHDotNetTrainingBatch1.MvcApp\SLHDotNetTrainingBatch1.MvcApp.csproj", "{C91A870E-59BC-4B49-B399-B93359CBA94E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLHDotNetTrainingBatch1.MvcApp", "SLHDotNetTrainingBatch1.MvcApp\SLHDotNetTrainingBatch1.MvcApp.csproj", "{C91A870E-59BC-4B49-B399-B93359CBA94E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mvc", "Mvc", "{9A50D5C9-1787-4359-A2EA-6B8971BBD737}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExampleProjects", "ExampleProjects", "{7D1A74B0-9CBF-4208-A2A8-F91A65DC52C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeLadderApi", "SnakeLadderApi\SnakeLadderApi.csproj", "{618718F0-87EB-4548-85DC-642AF5E21723}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -146,6 +148,10 @@ Global
 		{C91A870E-59BC-4B49-B399-B93359CBA94E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C91A870E-59BC-4B49-B399-B93359CBA94E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C91A870E-59BC-4B49-B399-B93359CBA94E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{618718F0-87EB-4548-85DC-642AF5E21723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{618718F0-87EB-4548-85DC-642AF5E21723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{618718F0-87EB-4548-85DC-642AF5E21723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{618718F0-87EB-4548-85DC-642AF5E21723}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

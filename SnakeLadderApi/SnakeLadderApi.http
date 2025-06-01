@@ -1,0 +1,6 @@
+@SnakeLadderApi_HostAddress = http://localhost:5056
+
+GET {{SnakeLadderApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
