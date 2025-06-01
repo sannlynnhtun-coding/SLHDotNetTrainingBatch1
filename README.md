@@ -59,4 +59,3 @@ https://github.com/microsoft/sql-server-samples/blob/master/samples/databases/no
 
 dotnet ef dbcontext scaffold "Server=.;Database=MiniWallet;User Id=sa;Password=sasa@123;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o AppDbContextModels -c AppDbContext -f
 
-dotnet ef dbcontext scaffold "Server=.;Database=SnakeLadder;User Id=sa;Password=sasa@123;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o AppDbContextModels -c AppDbContext -f
