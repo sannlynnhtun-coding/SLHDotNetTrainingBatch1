@@ -103,10 +103,37 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
             using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
             db.Open();
 
-            string query = @"";
+            var conditions = string.Empty;
+            if (!string.IsNullOrEmpty(requestModel.WalletUserName))
+            {
+                conditions += " [WalletUserName] = @WalletUserName, ";
+            }
+            if (!string.IsNullOrEmpty(requestModel.FullName))
+            {
+                conditions += " [FullName] = @FullName, ";
+            }
+            if (!string.IsNullOrEmpty(requestModel.MobileNo))
+            {
+                conditions += " [MobileNo] = @MobileNo, ";
+            }
+            if (requestModel.Balance > 0)
+            {
+                conditions += " [Balance] = @Balance, ";
+            }
+            conditions = conditions.Substring(0, conditions.Length - 2);
+            string query = $@"UPDATE [dbo].[Tbl_Wallet]
+                     SET {conditions}
+                     WHERE [WalletId] = @WalletId";
 
-            //var result = await db.ExecuteAsync(query, requestModel);
-            var result = 1;
+            var parameters = new
+            {
+                WalletId = id,
+                WalletUserName = requestModel.WalletUserName,
+                FullName = requestModel.FullName,
+                MobileNo = requestModel.MobileNo,
+                Balance = requestModel.Balance,
+            };
+            var result = await db.ExecuteAsync(query, parameters);
             bool isSuccess = result > 0;
             string message = isSuccess ? "Success." : "Fail.";
 
