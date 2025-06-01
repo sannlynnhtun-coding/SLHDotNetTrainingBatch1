@@ -1,0 +1,32 @@
+﻿@model List<TranscationModel>
+@{
+	int count = 0;
+	ViewData["Title"] = "Wallet History";
+}
+<h1>Wallet History</h1>
+
+
+<table class="table table-responsive">
+	<thead>
+		<tr>
+			<th>No</th>
+			<th>From Mobile NO.</th>
+			<th>To Mobile NO </th>
+			<th>Amount</th>
+			<th>Date Time</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@(++count)</td>
+				<td>@item.FromMobileNo</td>
+				<td>@item.ToMobileNo</td>
+				<td>@item.Amount</td>
+				<td>@item.TransctationDate</td>
+			</tr>
+		}
+
+	</tbody>
+</table>
