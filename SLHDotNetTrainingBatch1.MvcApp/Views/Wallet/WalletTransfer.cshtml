@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Transfer";
+}
+<h1>Transfer</h1>
+
+<form method="post" action="/Wallet/Transfer">
+    <div class="mb-3">
+        <label for="txtFromMobileNO" class="form-label">From Mobile No</label>
+        <input type="text" name="FromMobileNo" class="form-control" id="txtFromMobileNO">
+    </div>
+
+    <div class="mb-3">
+        <label for="txtToMobileNo" class="form-label">To Mobile No</label>
+        <input type="text" name="ToMobileNO" class="form-control" id="txtToMobileNo">
+
+    </div>
+    <div class="mb-3">
+        <label for="txtAmount" class="form-label">Amount</label>
+        <input type="text" name="Amount" class="form-control" id="txtAmount">
+    </div>
+    <div class="right">
+        <a class="btn btn-secondary" href="/Wallet/Transfer">Cancel</a>
+        <button type="submit" class="btn btn-success" id="btnSave">Transfer</button>
+    </div>
+</form>

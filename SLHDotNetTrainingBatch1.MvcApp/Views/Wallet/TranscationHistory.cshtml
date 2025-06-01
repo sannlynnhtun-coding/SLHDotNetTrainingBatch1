@@ -1,0 +1,15 @@
+﻿@model TranscationModel
+
+
+<h1 class="text-center mt-4">Transaction History</h1>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-center">
+        <div class="bg-secondary text-white p-4 rounded" style="width: 400px; font-size: 1.1rem;">
+            <p><strong>From Mobile No:</strong><br />@Model.FromMobileNo</p>
+            <p><strong>To Mobile No:</strong><br />@Model.ToMobileNo</p>
+            <p><strong>Amount:</strong><br />@Model.Amount</p>
+        </div>
+    </div>
+</div>
+<a href="/Wallet/HistoryIndex" class="align-content-center btn btn-outline-dark">Go to History</a>
