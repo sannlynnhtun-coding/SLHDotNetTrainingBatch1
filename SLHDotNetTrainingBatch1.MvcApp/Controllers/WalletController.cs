@@ -196,50 +196,55 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
             if (!requestModel.FromMobileNo.IsNullOrEmptyV2())
             {
                 message = "From Mobile No is Required";
-                goto Result;
+                goto InvalidResult;
             }
             if (!requestModel.ToMobileNo.IsNullOrEmptyV2())
             {
                 message = "To mobile No is required";
-                goto Result;
+                goto InvalidResult;
             }
             if (requestModel.Amount <= 0)
             {
                 message = "Amount is invalid";
-                goto Result;
+                goto InvalidResult;
             }
 
             using (IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString))
             {
                 db.Open();
-                string getQuery = "select * from Tbl_Wallet";
+                string getQuery = "select * from Tbl_Wallet where MobileNo = @MobileNo;";
 
-                var data = await db.QueryAsync<WalletModel>(getQuery);
+                var dataFromMobileNo = await db.QueryFirstOrDefaultAsync<WalletModel>(getQuery, new
+                {
+                    MobileNo = requestModel.FromMobileNo
+                });
 
-                var checkFrom = data.FirstOrDefault(x => x.MobileNo == requestModel.FromMobileNo);
-                if (checkFrom is null)
+                if (dataFromMobileNo is null)
                 {
                     message = "From Mobile No is Invalid";
-                    goto Result;
+                    goto InvalidResult;
                 }
 
-                var checkTo = data.FirstOrDefault(x => x.MobileNo == requestModel.ToMobileNo);
-                if (checkTo is null)
+                var dataToMobileNo = await db.QueryFirstOrDefaultAsync<WalletModel>(getQuery, new
+                {
+                    MobileNo = requestModel.ToMobileNo
+                });
+                if (dataToMobileNo is null)
                 {
                     message = "To Mobile No is Invalid";
-                    goto Result;
+                    goto InvalidResult;
                 }
 
-                if (checkFrom!.Balance - 10000 < requestModel.Amount)
+                if (dataFromMobileNo!.Balance - 10000 < requestModel.Amount)
                 {
                     message = "Insufficient Amount";
-                    goto Result;
+                    goto InvalidResult;
                 }
 
 
-                checkFrom.Balance -= requestModel.Amount;
+                dataFromMobileNo.Balance -= requestModel.Amount;
 
-                checkTo.Balance += requestModel.Amount;
+                dataToMobileNo.Balance += requestModel.Amount;
 
                 string updQuery = @"INSERT INTO [dbo].[Tbl_Transcation]
            ([TranscationId]
@@ -258,8 +263,8 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
 
                 TranscationModel responseModel = new TranscationModel()
                 {
-                    FromMobileNo = checkFrom.MobileNo,
-                    ToMobileNo = checkTo.MobileNo,
+                    FromMobileNo = dataFromMobileNo.MobileNo,
+                    ToMobileNo = dataToMobileNo.MobileNo,
                     Amount = requestModel.Amount,
                     TransctationDate = DateTime.Now,
                     TranscationNo = DateTime.Now.ToString("yyyyMMdd_hhmmss_fff"),
@@ -278,6 +283,11 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
             TempData["Message"] = message;
 
             return View("TranscationHistory", requestModel);
+
+        InvalidResult:
+            TempData["IsSuccess"] = false;
+            TempData["Message"] = message;
+            return RedirectToAction("Transfer");
         }
     }
        
