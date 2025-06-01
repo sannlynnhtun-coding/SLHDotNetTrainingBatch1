@@ -10,10 +10,10 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
     {
         SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder
         {
-            DataSource = "HNINWUTTYI\\MSSQLSERVER2022",
+            DataSource = ".",
             InitialCatalog = "MiniWallet",
             UserID = "sa",
-            Password = "admin123!",
+            Password = "sasa@123",
             TrustServerCertificate = true
         };
 
