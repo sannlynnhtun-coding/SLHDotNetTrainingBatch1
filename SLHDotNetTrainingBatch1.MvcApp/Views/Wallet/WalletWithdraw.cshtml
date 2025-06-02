@@ -4,6 +4,8 @@
 @{
 }
 
+<h1>Wallet Withdraw</h1>
+
 
 @{
     string message = Convert.ToString(TempData["Message"] ?? string.Empty);
@@ -17,18 +19,12 @@
 }
 <div class="card align-items-center" style="width: 18rem;">
     <div class="card-body">
-        <form class="row g-3" method="post" action="/Wallet/Transfer">
+        <form class="row g-3" method="post" action="/Wallet/Withdraw">
 
             <div class="col-md-12">
-                <label for="FromMobileNo" class="form-label">From</label>
-                <input type="text" name="FromMobileNo" class="form-control" id="FromMobileNo" required>
+                <label for="MobileNo" class="form-label">MobileNo</label>
+                <input type="text" name="MobileNo" class="form-control" id="MobileNo" required>
             </div>
-
-            <div class="col-md-12">
-                <label for="ToMobileNo" class="form-label">To</label>
-                <input type="text" name="ToMobileNo" class="form-control" id="ToMobileNo" required>
-            </div>
-
             <div class="col-md-12">
                 <label for="Amount" class="form-label">Amount</label>
                 <input type="text" name="Amount" class="form-control" id="Amount" required>
@@ -36,7 +32,7 @@
 
             <div>
                 <button type="button" class="btn btn-outline-warning">Cancel</button>
-                <button type="submit" class="btn btn-outline-primary float-end">Transfer</button>
+                <button type="submit" class="btn btn-outline-success float-end">Withdraw</button>
             </div>
 
         </form>

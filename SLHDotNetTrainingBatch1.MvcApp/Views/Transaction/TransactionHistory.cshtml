@@ -1,0 +1,39 @@
+﻿@using NOS_MVC.Controllers
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<TransactionModel>
+
+<h1>Transaction History</h1>
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Transaction No</th>
+
+            <th>From</th>
+            <th>To</th>
+            <th>To Name</th>
+            <th>Amount</th>
+            <th>Transaction Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.TransactionId</td>
+
+                <td>@item.FromMobileNo</td>
+                
+                <td>@item.ToMobileNo</td>
+                <td>@item.FullName</td>
+                <td>@item.Amount</td>
+                <td>@item.TransactionDate</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+
+
+
+
+<div class="card align-items-center" style="width: 18rem;">
+    <div class="card-body">
+        <form class="row g-3" method="post" action="/Wallet/check-balance">
+
+            <div class="col-md-12">
+                <label for="MobileNo" class="form-label">Mobile No</label>
+                <input type="text" name="MobileNo" class="form-control" id="MobileNo" required>
+            </div>
+
+
+            <div>
+                <button type="button" class="btn btn-outline-warning">Cancel</button>
+                <button type="submit" class="btn btn-outline-primary float-end">Check</button>
+            </div>
+
+        </form>
+    </div>
+</div>

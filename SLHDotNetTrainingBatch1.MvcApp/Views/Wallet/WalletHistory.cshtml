@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<WalletHistoryModel>
+
+
+<h1>Wallet History</h1>
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Wallet History ID</th>
+
+            <th>Mobile Number</th>
+            <th>Transaction Type</th>
+            <th>Amount</th>
+            <th>Date</th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.WalletHistoryId</td>
+
+                <td>@item.MobileNo</td>
+
+                <td>@item.TransactionType</td>
+                <td>@item.Amount</td>
+                <td>@item.DateTime</td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>

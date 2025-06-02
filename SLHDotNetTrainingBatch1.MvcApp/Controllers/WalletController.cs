@@ -1,15 +1,17 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using NOS_MVC.Controllers;
 using SLHDotNetTrainingBatch1.Shared;
 using System.Data;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
 {
     public class WalletController : Controller
     {
-        SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder
+        private readonly SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder
         {
             DataSource = ".",
             InitialCatalog = "MiniWallet",
@@ -180,6 +182,275 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
             return RedirectToAction("Index");
         }
 
+
+
+        [ActionName("History")]
+        public async Task<IActionResult> WalletHistory()
+        {
+            IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            db.Open();
+            string query = "SELECT * FROM Tbl_WalletHistory";
+
+            var result = await db.QueryAsync<WalletHistoryModel>(query);
+
+
+            return View("WalletHistory", result.ToList());
+        }
+
+
+
+        [ActionName("Deposit")]
+        public IActionResult WalletDepositView()
+        {
+
+            return View("WalletDeposit");
+        }
+
+        [HttpPost]
+        [ActionName("Deposit")]
+        public async Task<IActionResult> WalletDeposit(WalletDepositModel requestModel)
+        {
+            IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+
+            db.Open();
+
+
+
+            var data = await db.QueryAsync<WalletModel>(
+                "SELECT * FROM Tbl_Wallet WHERE MobileNo = @MobileNo", new WalletModel
+                {
+                    MobileNo = requestModel.MobileNo
+
+
+                });
+
+            if (data.ToList().Count <= 0)
+            {
+                TempData["isSuccess"] = false;
+                TempData["Message"] = "Mobile number doesn't exist";
+
+                return RedirectToAction("Deposit");
+            }
+
+
+
+            string query = @"
+                INSERT INTO Tbl_WalletHistory
+                (TransactionType, Amount, MobileNo, DateTime)
+                VALUES (@TransactionType, @Amount, @MobileNo, @DateTime)";
+
+            var result = await db.ExecuteAsync(query, new WalletDepositModel
+            {
+                TransactionType = "Deposit",
+                Amount = requestModel.Amount,
+                MobileNo = requestModel.MobileNo,
+                DateTime = DateTime.Now
+            });
+
+            await db.ExecuteAsync("UPDATE Tbl_Wallet SET Balance = Balance + @Amount WHERE MobileNo = @MobileNo", new
+            {
+                Amount = requestModel.Amount,
+                MobileNo = requestModel.MobileNo
+            });
+
+            if (result > 0)
+            {
+                TempData["isSuccess"] = true;
+                TempData["message"] = "Deposit successful";
+            }
+            return RedirectToAction("History");
+        }
+
+
+
+
+        //==============================================================================
+
+        [ActionName("Withdraw")]
+        public IActionResult WalletWithdrawView()
+        {
+
+            return View("WalletWithdraw");
+        }
+
+        [HttpPost]
+        [ActionName("Withdraw")]
+        public async Task<IActionResult> WalletWithdraw(WalletWithdrawModel requestModel)
+        {
+            IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+
+            db.Open();
+
+
+
+            var data = await db.QueryAsync<WalletModel>(
+                "SELECT * FROM Tbl_Wallet WHERE MobileNo = @MobileNo", new WalletModel
+                {
+                    MobileNo = requestModel.MobileNo
+
+
+                });
+
+            if (data.ToList().Count <= 0)
+            {
+                TempData["isSuccess"] = false;
+                TempData["Message"] = "Mobile number doesn't exist";
+
+                return RedirectToAction("Withdraw");
+            }
+
+
+
+            string query = @"
+                INSERT INTO Tbl_WalletHistory
+                (TransactionType, Amount, MobileNo, DateTime)
+                VALUES (@TransactionType, @Amount, @MobileNo, @DateTime)";
+
+            var result = await db.ExecuteAsync(query, new WalletWithdrawModel
+            {
+                TransactionType = "Withdraw",
+                Amount = requestModel.Amount,
+                MobileNo = requestModel.MobileNo,
+                DateTime = DateTime.Now
+            });
+
+            await db.ExecuteAsync("UPDATE Tbl_Wallet SET Balance = Balance - @Amount WHERE MobileNo = @MobileNo", new
+            {
+                Amount = requestModel.Amount,
+                MobileNo = requestModel.MobileNo
+            });
+
+            if (result > 0)
+            {
+                TempData["isSuccess"] = true;
+                TempData["message"] = "Withdraw successful";
+            }
+            return RedirectToAction("History");
+        }
+
+
+
+        [ActionName("Transfer")]
+        public IActionResult WalletTransferView()
+        {
+            return View("WalletTransfer");
+        }
+
+        [HttpPost]
+        [ActionName("Transfer")]
+        public async Task<IActionResult> WalletTransfer(WalletTransferModel requestModel)
+        {
+            IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+
+            db.Open();
+
+            var fromWallet = await db.QueryFirstOrDefaultAsync<WalletModel>(
+                "SELECT * FROM Tbl_Wallet WHERE MobileNo = @FromMobileNo", requestModel);
+
+            var toWallet = await db.QueryFirstOrDefaultAsync<WalletModel>(
+                "SELECT * FROM Tbl_Wallet WHERE MobileNo = @ToMobileNo", requestModel);
+
+            if (fromWallet is null)
+            {
+                TempData["isSuccess"] = false;
+                TempData["Message"] = "From Mobile number doesn't exist";
+
+                return RedirectToAction("Transfer");
+            }
+
+            if (toWallet is null)
+            {
+                TempData["isSuccess"] = false;
+                TempData["Message"] = "To Mobile number doesn't exist";
+
+                return RedirectToAction("Transfer");
+            }
+
+            if (fromWallet.Balance < requestModel.Amount)
+            {
+                TempData["isSuccess"] = false;
+                TempData["Message"] = "Insufficient balance for transfer";
+
+                return RedirectToAction("Transfer");
+            }
+
+            string fromQuery = @"UPDATE Tbl_Wallet SET Balance = Balance - @Amount WHERE MobileNo = @FromMobileNo";
+
+            string toQuery = @"UPDATE Tbl_Wallet SET Balance = Balance + @Amount WHERE MobileNo = @ToMobileNo";
+
+            string transactionQuery = @"INSERT INTO Tbl_Transaction VALUES
+                                            (@TransactionId,
+                                             @TransactionNo,
+                                            @FromMobileNo,
+                                            @ToMobileNo,
+                                            @Amount,
+                                            @TransactionDate)";
+
+            var fromResult = await db.ExecuteAsync(fromQuery, requestModel);
+
+            var toResult = await db.ExecuteAsync(toQuery, requestModel);
+
+            var transactionResult = await db.ExecuteAsync(transactionQuery, new TransactionModel
+            {
+
+                TransactionId = Guid.NewGuid().ToString(),
+                TransactionNo = Guid.NewGuid().ToByteArray(),
+                FromMobileNo = requestModel.FromMobileNo,
+                ToMobileNo = requestModel.ToMobileNo,
+                Amount = requestModel.Amount,
+                TransactionDate = DateTime.Now
+            });
+
+            if (fromResult > 0 && toResult > 0 && transactionResult > 0)
+            {
+                TempData["isSuccess"] = true;
+                TempData["message"] = "Transfer successful";
+            }
+            else
+            {
+                TempData["isSuccess"] = false;
+                TempData["message"] = "Transfer failed";
+            }
+
+            return RedirectToAction("Index");
+
+
+
+
+        }
+        [ActionName("check-balance")]
+
+        public IActionResult WalletCheckBalanceView()
+        {
+            return View("WalletCheckBalance");
+        }
+
+        [HttpPost]
+        [ActionName("check-balance")]
+
+        public async Task<IActionResult> WalletCheckBalance(WalletCheckBalanceModel requestModel)
+        {
+            IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            if (NOS_MVC.Controllers.DevCode.IsWalletExist(requestModel.MobileNo))
+            {
+                String query = "SELECT * FROM Tbl_Wallet WHERE MobileNo = @MobileNo";
+
+                var Balance = await db.QueryFirstOrDefaultAsync<WalletCheckBalanceResponseModel>(query, requestModel);
+
+                TempData["isSuccess"] = true;
+                TempData["message"] = $"Your balance is {Balance.Balance}";
+            }
+            else
+            {
+                TempData["isSuccess"] = false;
+                TempData["message"] = "Mobile number doesn't exist";
+                return RedirectToAction("check-balance");
+            }
+            return RedirectToAction("check-balance");
+        }
+
+    
+
         [HttpGet]
         [ActionName("Transfer")]
         public IActionResult WalletTransfer()
@@ -193,12 +464,12 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         {
             bool isSuccess = false;
             string message = string.Empty;
-            if (!requestModel.FromMobileNo.IsNullOrEmptyV2())
+            if (!requestModel.FromMobileNo.IsNullOrEmptyV3())
             {
                 message = "From Mobile No is Required";
                 goto InvalidResult;
             }
-            if (!requestModel.ToMobileNo.IsNullOrEmptyV2())
+            if (!requestModel.ToMobileNo.IsNullOrEmptyV3())
             {
                 message = "To mobile No is required";
                 goto InvalidResult;
@@ -290,6 +561,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
             return RedirectToAction("Transfer");
         }
     }
+}
        
 
     public class WalletModel
@@ -300,6 +572,54 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         public string MobileNo { get; set; }
         public decimal Balance { get; set; }
     }
+
+
+    public class WalletHistoryModel
+    {
+        public int WalletHistoryId { get; set; }
+        public string TransactionType { get; set; }
+        public decimal Amount { get; set; }
+        public string MobileNo { get; set; }
+        public DateTime DateTime { get; set; }
+    }
+
+public class WalletDepositModel
+{
+    public int WalletHistoryId { get; set; }
+    public string TransactionType { get; set; }
+    public decimal Amount { get; set; }
+    public string MobileNo { get; set; }
+    public DateTime DateTime { get; set; }
+}
+    public class WalletWithdrawModel
+    {
+        public int WalletHistoryId { get; set; }
+        public string TransactionType { get; set; }
+        public decimal Amount { get; set; }
+        public string MobileNo { get; set; }
+        public DateTime DateTime { get; set; }
+    }
+
+public class WalletTransferModel
+{
+
+    public decimal Amount { get; set; }
+    public string FromMobileNo { get; set; }
+    public string ToMobileNo { get; set; }
+
+}
+
+public class WalletCheckBalanceModel
+{
+    public string MobileNo { get; set; }
+}
+
+public class WalletCheckBalanceResponseModel
+{
+
+    public decimal Balance { get; set; }
+}
+
     public class TranscationModel()
     {
         public string TranscationId { get; set; } = null!;
@@ -314,4 +634,6 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
 
         public DateTime TransctationDate { get; set; }
     }
-}
+
+
+
