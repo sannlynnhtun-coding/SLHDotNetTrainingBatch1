@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 using SnakeLadder.Database.Entities;
 using SnakeLadderApi.Models;
 using SnakeLadderApi.Models.PlayerPosition;
+using System.Diagnostics.Eventing.Reader;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SnakeLadderApi.Services.PlayerPositionServices;
 
@@ -27,7 +29,7 @@ public class CreatePlayerPositionService
         }
     }
 
-    public CreatePlayerPositionResponseModel CreatePlayerPosition(UpdatePlayerPositionRequestModel requestModel)
+    public BasedResponseModel CreatePlayerPosition(UpdatePlayerPositionRequestModel requestModel)
     {
         /*
          - Select previous RowNo by PlayerId
@@ -37,7 +39,7 @@ public class CreatePlayerPositionService
          - Insert record
          */
 
-        CreatePlayerPositionResponseModel model;
+        //CreatePlayerPositionResponseModel model;
         int randomNo = DiceRoller.RollDie();
         var currentPositionNo = 0;
         int updatedPositionNo = currentPositionNo + randomNo;
@@ -53,13 +55,15 @@ public class CreatePlayerPositionService
         updatedPositionNo = currentPositionNo + randomNo;
 
         var itemSnake = _context.TblSnakes.FirstOrDefault(x => x.FromPosition == updatedPositionNo)!;
+        
+        var itemLadder = _context.TblLadders.FirstOrDefault(x => x.FromPosition == updatedPositionNo)!;
+
         if (itemSnake is not null)
         {
             updatedPositionNo = itemSnake.ToPosition;
         }
 
-        var itemLadder = _context.TblLadders.FirstOrDefault(x => x.FromPosition == updatedPositionNo)!;
-        if (itemLadder is not null)
+        else if (itemLadder is not null)
         {
             updatedPositionNo = itemLadder.ToPosition;
         }
@@ -70,16 +74,21 @@ public class CreatePlayerPositionService
             CurrentPosition = updatedPositionNo,
             CreatedDate = DateTime.UtcNow,
         });
-        _context.SaveChanges();
+        var affectedRows = _context.SaveChanges();
 
-         return model = new CreatePlayerPositionResponseModel
+        var result = new CreatePlayerPositionResponseModel
         {
             PlayerId = requestModel.PlayerId,
             CurrentPosition = updatedPositionNo,
             CreatedDate = DateTime.UtcNow,
         };
-
-
+        var model = new BasedResponseModel
+        {
+            IsSuccess = affectedRows > 0,
+            Message = affectedRows > 0 ? "Success." : "Fail.",
+            Data = result
+        };
+        return model;
     }
 }
 
