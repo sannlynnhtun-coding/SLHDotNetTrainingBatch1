@@ -15,7 +15,7 @@ namespace NOS_MVC.Controllers
             Password = "sasa@123",
             TrustServerCertificate = true
         };
-        public static Boolean IsNullOrEmptyV2(this string? number)
+        public static Boolean IsNullOrEmptyV3(this string? number)
         {
             if (String.IsNullOrEmpty(number) || String.IsNullOrEmpty(number.Trim()))
             {

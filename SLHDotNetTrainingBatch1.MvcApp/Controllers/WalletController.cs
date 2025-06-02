@@ -11,7 +11,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
 {
     public class WalletController : Controller
     {
-        SqlConnectionStringBuilder stringBuilder = new SqlConnectionStringBuilder
+        private readonly SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder
         {
             DataSource = ".",
             InitialCatalog = "MiniWallet",
@@ -23,7 +23,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         [ActionName("Index")]
         public async Task<IActionResult> WalletIndex()
         {
-            using IDbConnection db = new SqlConnection(stringBuilder.ConnectionString);
+            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
             db.Open();
             var lst = await db.QueryAsync<WalletModel>("select * from tbl_wallet");
             return View("WalletIndex", lst.ToList());
@@ -48,7 +48,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         [ActionName("Create")]
         public async Task<IActionResult> WalletCreateAsync(WalletModel requestModel)
         {
-            using IDbConnection db = new SqlConnection(stringBuilder.ConnectionString);
+            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
             db.Open();
 
             string query = @"INSERT INTO [dbo].[Tbl_Wallet]
@@ -88,7 +88,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         [ActionName("Edit")]
         public async Task<IActionResult> WalletEdit(int id)
         {
-            using IDbConnection db = new SqlConnection(stringBuilder.ConnectionString);
+            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
             db.Open();
 
             string query = @"SELECT [WalletId]
@@ -112,7 +112,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         [ActionName("Update")]
         public async Task<IActionResult> WalletUpdate(int id, WalletModel requestModel)
         {
-            using IDbConnection db = new SqlConnection(stringBuilder.ConnectionString);
+            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
             db.Open();
 
             var conditions = string.Empty;
@@ -160,7 +160,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         [ActionName("Delete")]
         public async Task<IActionResult> WalletDelete(int id)
         {
-            using IDbConnection db = new SqlConnection(stringBuilder.ConnectionString);
+            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
             db.Open();
 
             string query = @"SELECT [WalletId]
@@ -187,7 +187,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         [ActionName("History")]
         public async Task<IActionResult> WalletHistory()
         {
-            IDbConnection db = new SqlConnection(stringBuilder.ConnectionString);
+            IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
             db.Open();
             string query = "SELECT * FROM Tbl_WalletHistory";
 
@@ -210,7 +210,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         [ActionName("Deposit")]
         public async Task<IActionResult> WalletDeposit(WalletDepositModel requestModel)
         {
-            IDbConnection db = new SqlConnection(stringBuilder.ConnectionString);
+            IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
 
             db.Open();
 
@@ -277,7 +277,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         [ActionName("Withdraw")]
         public async Task<IActionResult> WalletWithdraw(WalletWithdrawModel requestModel)
         {
-            IDbConnection db = new SqlConnection(stringBuilder.ConnectionString);
+            IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
 
             db.Open();
 
@@ -340,7 +340,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         [ActionName("Transfer")]
         public async Task<IActionResult> WalletTransfer(WalletTransferModel requestModel)
         {
-            IDbConnection db = new SqlConnection(stringBuilder.ConnectionString);
+            IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
 
             db.Open();
 
@@ -430,15 +430,15 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
 
         public async Task<IActionResult> WalletCheckBalance(WalletCheckBalanceModel requestModel)
         {
-            IDbConnection db = new SqlConnection(stringBuilder.ConnectionString);
-            if (DevCode.IsWalletExist(requestModel.MobileNo))
+            IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            if (NOS_MVC.Controllers.DevCode.IsWalletExist(requestModel.MobileNo))
             {
                 String query = "SELECT * FROM Tbl_Wallet WHERE MobileNo = @MobileNo";
 
                 var Balance = await db.QueryFirstOrDefaultAsync<WalletCheckBalanceResponseModel>(query, requestModel);
 
                 TempData["isSuccess"] = true;
-                TempData["message"] = $"Your balance is {Balance!.Balance}";
+                TempData["message"] = $"Your balance is {Balance.Balance}";
             }
             else
             {
@@ -449,7 +449,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
             return RedirectToAction("check-balance");
         }
 
-    }
+    
 
         [HttpGet]
         [ActionName("Transfer")]
@@ -464,12 +464,12 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         {
             bool isSuccess = false;
             string message = string.Empty;
-            if (!requestModel.FromMobileNo.IsNullOrEmptyV2())
+            if (!requestModel.FromMobileNo.IsNullOrEmptyV3())
             {
                 message = "From Mobile No is Required";
                 goto InvalidResult;
             }
-            if (!requestModel.ToMobileNo.IsNullOrEmptyV2())
+            if (!requestModel.ToMobileNo.IsNullOrEmptyV3())
             {
                 message = "To mobile No is required";
                 goto InvalidResult;
@@ -561,6 +561,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
             return RedirectToAction("Transfer");
         }
     }
+}
        
 
     public class WalletModel
@@ -573,14 +574,14 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
     }
 
 
-public class WalletHistoryModel
-{
-    public int WalletHistoryId { get; set; }
-    public string TransactionType { get; set; }
-    public decimal Amount { get; set; }
-    public string MobileNo { get; set; }
-    public DateTime DateTime { get; set; }
-}
+    public class WalletHistoryModel
+    {
+        public int WalletHistoryId { get; set; }
+        public string TransactionType { get; set; }
+        public decimal Amount { get; set; }
+        public string MobileNo { get; set; }
+        public DateTime DateTime { get; set; }
+    }
 
 public class WalletDepositModel
 {
@@ -590,14 +591,14 @@ public class WalletDepositModel
     public string MobileNo { get; set; }
     public DateTime DateTime { get; set; }
 }
-public class WalletWithdrawModel
-{
-    public int WalletHistoryId { get; set; }
-    public string TransactionType { get; set; }
-    public decimal Amount { get; set; }
-    public string MobileNo { get; set; }
-    public DateTime DateTime { get; set; }
-}
+    public class WalletWithdrawModel
+    {
+        public int WalletHistoryId { get; set; }
+        public string TransactionType { get; set; }
+        public decimal Amount { get; set; }
+        public string MobileNo { get; set; }
+        public DateTime DateTime { get; set; }
+    }
 
 public class WalletTransferModel
 {
@@ -618,8 +619,7 @@ public class WalletCheckBalanceResponseModel
 
     public decimal Balance { get; set; }
 }
-        public decimal Balance { get; set; }
-    }
+
     public class TranscationModel()
     {
         public string TranscationId { get; set; } = null!;
@@ -634,4 +634,6 @@ public class WalletCheckBalanceResponseModel
 
         public DateTime TransctationDate { get; set; }
     }
+
+
 
