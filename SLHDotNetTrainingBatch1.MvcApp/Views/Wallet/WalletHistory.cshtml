@@ -1,11 +1,8 @@
 ﻿@model List<WalletModel>
-@{
-    int count = 0;
-}
 
-<h1>Wallet Users (@Model.Count)</h1>
+<h1>Wallet Page (@Model.Count)</h1>
 
-<a class="btn btn-outline-success" href="/Wallet/Create">Create</a>
+<a class="btn btn-outline-success" href="/wallet/create">Create New Wallet</a>
 
 <a class="btn btn-outline-success" href="/transaction/history">Transaction History</a>
 
@@ -20,28 +17,30 @@
 <a class="btn btn-outline-primary" href="/wallet/transfer">Transfer</a>
 
 
+
 <table class="table table-responsive">
     <thead>
         <tr>
             <th>Actions</th>
-            <th>No.</th>
+
             <th>User Name</th>
-            <th>Mobile No</th>
+            <th>Phone Number</th>
+            <th>Balance</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            @* count++; *@
             <tr>
-                @* <td>@count</td> *@
                 <td>
-                    <a href="/Wallet/Edit/@item.WalletId" class="btn btn-outline-warning">Edit</a>
-                    <a href="/Wallet/Delete/@item.WalletId" class="btn btn-outline-danger">Delete</a>
+                    <a class="btn btn-outline-warning" href="/Wallet/Update/@item.WalletId">Update</a>
+                    <a class="btn btn-outline-danger" href="/Wallet/Delete/@item.WalletId">Delete</a>
                 </td>
-                <td>@(++count)</td>
+
                 <td>@item.WalletUserName</td>
+
                 <td>@item.MobileNo</td>
+                <td>@item.Balance</td>
             </tr>
         }
     </tbody>

@@ -22,7 +22,7 @@ public class UpdatePlayerPositionService
 
         return new UpdatePlayerPositionResponseModel
         {
-
+            PlayerId = requestModel.PlayerPositionId
         };
     }
 }
