@@ -634,5 +634,4 @@ public class WalletCheckBalanceResponseModel
 
         public DateTime TransctationDate { get; set; }
     }
-}
 
