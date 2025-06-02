@@ -10,24 +10,20 @@ namespace SnakeLadderApi.Controllers
     public class PlayerPositionController : ControllerBase
     {
 
-        private readonly UpdatePlayerPositionService _updatePlayerPositionService;
+        private readonly CreatePlayerPositionService _updatePlayerPositionService;
 
-        public PlayerPositionController(UpdatePlayerPositionService updatePlayerPositionService)
+        public PlayerPositionController(CreatePlayerPositionService updatePlayerPositionService)
         {
             _updatePlayerPositionService = updatePlayerPositionService;
         }
 
-        [HttpPost("Update")]
-
-        public IActionResult UpdatePlayerPosition([FromBody] UpdatePlayerPositionRequestModel requestModel)
+        [HttpPost]
+        [Route("CreatePlayerPosition")]
+        public IActionResult CreatePlayerPosition(UpdatePlayerPositionRequestModel requestModel)
         {
+            var model = _updatePlayerPositionService.CreatePlayerPosition(requestModel);
 
-            //use _updatePlayerPositionService to update the player position
-
-            
-            var response = _updatePlayerPositionService.UpdatePlayerPosition(requestModel);
-
-            return Ok(response);
+            return Ok(model);
         }
     }
 }

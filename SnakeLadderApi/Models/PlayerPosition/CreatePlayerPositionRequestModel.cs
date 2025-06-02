@@ -4,7 +4,7 @@
     //This is the model for the player position request
     public class UpdatePlayerPositionRequestModel
     {
-        public int PlayerPositionId { get; set; }
+        public int PlayerId { get; set; }
 
     }
 }
