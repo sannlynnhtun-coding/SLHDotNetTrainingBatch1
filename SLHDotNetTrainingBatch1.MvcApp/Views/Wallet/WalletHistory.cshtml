@@ -1,46 +1,41 @@
-﻿@model List<WalletModel>
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
 
-<h1>Wallet Page (@Model.Count)</h1>
-
-<a class="btn btn-outline-success" href="/wallet/create">Create New Wallet</a>
-
-<a class="btn btn-outline-success" href="/transaction/history">Transaction History</a>
-
-<a class="btn btn-outline-success" href="/wallet/history">Wallet History</a>
-
-<a class="btn btn-outline-primary" href="/wallet/deposit">Deposit</a>
-
-<a class="btn btn-outline-primary" href="/wallet/withdraw">Withdraw</a>
-
-<a class="btn btn-outline-primary" href="/wallet/check-balance">Check Balance</a>
-
-<a class="btn btn-outline-primary" href="/wallet/transfer">Transfer</a>
+@model List<WalletHistoryModel>
 
 
+<h1>Wallet History</h1>
 
 <table class="table table-responsive">
     <thead>
         <tr>
-            <th>Actions</th>
+            <th>Wallet History ID</th>
 
-            <th>User Name</th>
-            <th>Phone Number</th>
-            <th>Balance</th>
+            <th>Mobile Number</th>
+            <th>Transaction Type</th>
+            <th>Amount</th>
+            <th>Date</th>
+
+
+
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    <a class="btn btn-outline-warning" href="/Wallet/Update/@item.WalletId">Update</a>
-                    <a class="btn btn-outline-danger" href="/Wallet/Delete/@item.WalletId">Delete</a>
-                </td>
-
-                <td>@item.WalletUserName</td>
+                <td>@item.WalletHistoryId</td>
 
                 <td>@item.MobileNo</td>
-                <td>@item.Balance</td>
+
+                <td>@item.TransactionType</td>
+                <td>@item.Amount</td>
+                <td>@item.DateTime</td>
+
+
             </tr>
         }
     </tbody>

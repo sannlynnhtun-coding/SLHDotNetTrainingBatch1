@@ -2,9 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Transfer";
 }
-<h1>Transfer</h1>
 
 
 @{
@@ -15,10 +13,6 @@
 {
     <div id="divAlert" class="alert alert-@(isSuccess ? "success" : "danger")" role="alert">
         @message
-<form method="post" action="/Wallet/Transfer">
-    <div class="mb-3">
-        <label for="txtFromMobileNO" class="form-label">From Mobile No</label>
-        <input type="text" name="FromMobileNo" class="form-control" id="txtFromMobileNO">
     </div>
 }
 <div class="card align-items-center" style="width: 18rem;">
@@ -29,31 +23,22 @@
                 <label for="FromMobileNo" class="form-label">From</label>
                 <input type="text" name="FromMobileNo" class="form-control" id="FromMobileNo" required>
             </div>
-    <div class="mb-3">
-        <label for="txtToMobileNo" class="form-label">To Mobile No</label>
-        <input type="text" name="ToMobileNO" class="form-control" id="txtToMobileNo">
 
             <div class="col-md-12">
                 <label for="ToMobileNo" class="form-label">To</label>
                 <input type="text" name="ToMobileNo" class="form-control" id="ToMobileNo" required>
-    </div>
+            </div>
 
             <div class="col-md-12">
                 <label for="Amount" class="form-label">Amount</label>
                 <input type="text" name="Amount" class="form-control" id="Amount" required>
-    <div class="mb-3">
-        <label for="txtAmount" class="form-label">Amount</label>
-        <input type="text" name="Amount" class="form-control" id="txtAmount">
-    </div>
+            </div>
 
             <div>
                 <button type="button" class="btn btn-outline-warning">Cancel</button>
                 <button type="submit" class="btn btn-outline-primary float-end">Transfer</button>
-    <div class="right">
-        <a class="btn btn-secondary" href="/Wallet/Transfer">Cancel</a>
-        <button type="submit" class="btn btn-success" id="btnSave">Transfer</button>
-    </div>
+            </div>
 
-</form>
+        </form>
     </div>
 </div>
