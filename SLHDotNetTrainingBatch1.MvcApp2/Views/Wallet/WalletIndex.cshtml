@@ -1,9 +1,7 @@
-﻿@model List<WalletModel>
-@{
-    int count = 0;
+﻿@{
 }
 
-<h1>Wallet Users (@Model.Count)</h1>
+<h1>Wallet Users <span id="txtUserCount"></span></h1>
 
 <a class="btn btn-outline-success" href="/Wallet/Create">Create</a>
 
@@ -30,21 +28,34 @@
             <th>Balance</th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            @* count++; *@
-            <tr>
-                @* <td>@count</td> *@
-                <td>
-                    <a href="/Wallet/Edit/@item.WalletId" class="btn btn-outline-warning">Edit</a>
-                    <a href="/Wallet/Delete/@item.WalletId" class="btn btn-outline-danger">Delete</a>
-                </td>
-                <td>@(++count)</td>
-                <td>@item.WalletUserName</td>
-                <td>@item.MobileNo</td>
-                <td>@item.Balance.ToString("n0")</td>
-            </tr>
-        }
+    <tbody id="tbDataTable">
     </tbody>
 </table>
+
+@* <script>
+    alert("This is Wallet Index Page");
+</script> *@
+
+@section scripts {
+    <script>
+        $('#txtUserCount').html('100');
+        alert("This is Wallet Index Page - Scripts Section");
+    </script>
+}
+
+@section css {
+    @* <style>
+        body {
+            background-color: red;
+        }
+    </style> *@
+}
+
+@section header {
+   @*  <button type="button" class="btn btn-primary">
+        Notifications <span class="badge text-bg-secondary">4</span>
+    </button> *@
+    @* <partial name="ButtonBadge" data="100" /> *@
+
+    @await Html.PartialAsync("ButtonBadge", 100)
+}
