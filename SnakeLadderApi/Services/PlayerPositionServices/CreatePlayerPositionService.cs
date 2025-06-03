@@ -39,10 +39,23 @@ public class CreatePlayerPositionService
          - Insert record
          */
 
+        var isIdExist = _context.TblPlayers.FirstOrDefault(x => x.PlayerId == requestModel.PlayerId);
+
+        if (isIdExist is null)
+        {
+            return new BasedResponseModel
+            {
+                IsSuccess = false,
+                Message = "Player Id does not exist."
+            };
+        }
         //CreatePlayerPositionResponseModel model;
         int randomNo = DiceRoller.RollDie();
+        //int randomNo = 8;
         var currentPositionNo = 0;
         int updatedPositionNo = currentPositionNo + randomNo;
+
+        var message = string.Empty;
 
         var item = _context.TblPlayerPositions.Where(x => x.PlayerId == requestModel.PlayerId)
                     .OrderByDescending(x => x.CreatedDate)
@@ -50,6 +63,17 @@ public class CreatePlayerPositionService
                     .SingleOrDefault()!;
         if (item is not null)
         {
+            if(item.CurrentPosition > 100)
+            {
+                _context.TblPlayerPositions.Where(x => x.PlayerId == requestModel.PlayerId).ExecuteUpdate(x => x.SetProperty(y => y.CurrentPosition, 0));
+
+                _context.SaveChanges();
+                return new BasedResponseModel
+                {
+                    IsSuccess = true,
+                    Message = "You have already won the game!"
+                };
+            }
              currentPositionNo = item.CurrentPosition;
         }
         updatedPositionNo = currentPositionNo + randomNo;
@@ -61,11 +85,14 @@ public class CreatePlayerPositionService
         if (itemSnake is not null)
         {
             updatedPositionNo = itemSnake.ToPosition;
+
+            message = $"You got bitten by a snake! Moved from {currentPositionNo} to {updatedPositionNo}.";
         }
 
         else if (itemLadder is not null)
         {
             updatedPositionNo = itemLadder.ToPosition;
+            message = $"You climbed a ladder! Moved from {currentPositionNo} to {updatedPositionNo}.";
         }
 
         _context.TblPlayerPositions.Add(new TblPlayerPosition
@@ -74,12 +101,24 @@ public class CreatePlayerPositionService
             CurrentPosition = updatedPositionNo,
             CreatedDate = DateTime.UtcNow,
         });
+
+
+        //_context.TblPlayerPositions.Update(new TblPlayerPosition
+        //{
+        //    PlayerPositionId = item.PlayerPositionId,
+        //    PlayerId = requestModel.PlayerId,
+        //    CurrentPosition = updatedPositionNo,
+        //    CreatedDate = DateTime.UtcNow,
+        //});
         var affectedRows = _context.SaveChanges();
 
         var result = new CreatePlayerPositionResponseModel
         {
             PlayerId = requestModel.PlayerId,
+            PreviousPosition = currentPositionNo,
             CurrentPosition = updatedPositionNo,
+            DiceNumber = randomNo,
+            Message = message,
             CreatedDate = DateTime.UtcNow,
         };
         var model = new BasedResponseModel

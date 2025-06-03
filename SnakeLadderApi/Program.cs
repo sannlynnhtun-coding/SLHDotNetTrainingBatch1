@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SnakeLadder.Database.Entities;
+using SnakeLadderApi.Services.CreatePlayerService;
 using SnakeLadderApi.Services.PlayerPositionServices;
 using System;
 
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddScoped<CreatePlayerPositionService>();
+builder.Services.AddScoped<CreatePlayerService>();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnecton")));
 
