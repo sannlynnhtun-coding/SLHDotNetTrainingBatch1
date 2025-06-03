@@ -7,7 +7,7 @@ public partial class TblSnake
 {
     public int SnakeId { get; set; }
 
-    public int? FromPosition { get; set; }
+    public int FromPosition { get; set; }
 
-    public int? ToPosition { get; set; }
+    public int ToPosition { get; set; }
 }
