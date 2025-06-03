@@ -1,6 +1,10 @@
 ﻿<h1>Wallet Users <span id="txtCount"></span></h1>
 
-<a class="btn btn-outline-success" href="/Wallet/Create">Create</a>
+@* <a class="btn btn-outline-success" href="/Wallet/Create">Create</a> *@
+
+<button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#createModal">
+    Create
+</button>
 
 <a class="btn btn-outline-success" href="/transaction/history">Transaction History</a>
 
@@ -14,6 +18,20 @@
 
 <a class="btn btn-outline-primary" href="/wallet/transfer">Transfer</a>
 
+<!-- Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <partial name="~/Views/Wallet/WalletCreate.cshtml" />
+            </div>
+        </div>
+    </div>
+</div>
 
 <table class="table table-responsive">
     <thead>
@@ -31,6 +49,7 @@
 </table>
 
 @section scripts{
+    <script src="~/js/wallet/createwallet.js"></script>
     <script>
         loadData();
 
