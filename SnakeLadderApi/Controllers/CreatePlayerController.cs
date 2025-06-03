@@ -9,9 +9,9 @@ namespace SnakeLadderApi.Controllers
     [ApiController]
     public class CreatePlayerController : ControllerBase
     {
-        private readonly CreatePlyerService _createPlyerService;
+        private readonly CreatePlayerService _createPlyerService;
 
-        public CreatePlayerController(CreatePlyerService createPlyerService)
+        public CreatePlayerController(CreatePlayerService createPlyerService)
         {
             _createPlyerService = createPlyerService;
         }
@@ -19,7 +19,7 @@ namespace SnakeLadderApi.Controllers
         [HttpPost]
         public IActionResult CreatePlayer([FromBody] CreateRequestModel requestModel)
         {
-            var model = _createPlyerService.CreatePlayerService(requestModel);
+            var model = _createPlyerService.CreatePlayer(requestModel);
 
             return Ok(model);
         }

@@ -34,7 +34,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         {
             using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
             db.Open();
-            var lst = await db.QueryAsync<TranscationModel>("select * from Tbl_Transcation");
+            var lst = await db.QueryAsync<TranscationModel>("select * from Tbl_Transaction");
             return View("HistoryIndex", lst.ToList());
         }
 
@@ -156,29 +156,27 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         }
 
 
-        [HttpGet]
         [ActionName("Delete")]
+
         public async Task<IActionResult> WalletDelete(int id)
         {
-            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
             db.Open();
+            string query = "DELETE FROM Tbl_Wallet WHERE WalletId = @WalletId";
 
-            string query = @"SELECT [WalletId]
-      ,[WalletUserName]
-      ,[FullName]
-      ,[MobileNo]
-      ,[Balance]
-  FROM [dbo].[Tbl_Wallet]
-  where WalletId = @WalletId";
-            //var model = await db.QueryFirstOrDefaultAsync<WalletModel>(query, new { WalletId = id });
+            var result = await db.ExecuteAsync(query, new { WalletId = id });
 
-            var result = 1;
-            if (result == 0)
+            if (result > 0)
             {
-                TempData["IsSuccess"] = false;
-                TempData["Message"] = "No data found.";
-                return RedirectToAction("Index");
+                TempData["isSuccess"] = true;
+                TempData["message"] = "Wallet deleted successfully";
             }
+            else
+            {
+                TempData["isSuccess"] = false;
+                TempData["message"] = "Failed to delete wallet";
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -438,7 +436,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
                 var Balance = await db.QueryFirstOrDefaultAsync<WalletCheckBalanceResponseModel>(query, requestModel);
 
                 TempData["isSuccess"] = true;
-                TempData["message"] = $"Your balance is {Balance.Balance}";
+                TempData["message"] = $"Your balance is {Balance.Balance.ToString("n0")}";
             }
             else
             {
@@ -449,122 +447,124 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
             return RedirectToAction("check-balance");
         }
 
-    
-
-        [HttpGet]
-        [ActionName("Transfer")]
-        public IActionResult WalletTransfer()
-        {
-            return View("WalletTransfer");
-        }
-
-        [HttpPost]
-        [ActionName("Transfer")]
-        public async Task<IActionResult> WalletTransfer(TranscationModel requestModel)
-        {
-            bool isSuccess = false;
-            string message = string.Empty;
-            if (!requestModel.FromMobileNo.IsNullOrEmptyV3())
-            {
-                message = "From Mobile No is Required";
-                goto InvalidResult;
-            }
-            if (!requestModel.ToMobileNo.IsNullOrEmptyV3())
-            {
-                message = "To mobile No is required";
-                goto InvalidResult;
-            }
-            if (requestModel.Amount <= 0)
-            {
-                message = "Amount is invalid";
-                goto InvalidResult;
-            }
-
-            using (IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString))
-            {
-                db.Open();
-                string getQuery = "select * from Tbl_Wallet where MobileNo = @MobileNo;";
-
-                var dataFromMobileNo = await db.QueryFirstOrDefaultAsync<WalletModel>(getQuery, new
-                {
-                    MobileNo = requestModel.FromMobileNo
-                });
-
-                if (dataFromMobileNo is null)
-                {
-                    message = "From Mobile No is Invalid";
-                    goto InvalidResult;
-                }
-
-                var dataToMobileNo = await db.QueryFirstOrDefaultAsync<WalletModel>(getQuery, new
-                {
-                    MobileNo = requestModel.ToMobileNo
-                });
-                if (dataToMobileNo is null)
-                {
-                    message = "To Mobile No is Invalid";
-                    goto InvalidResult;
-                }
-
-                if (dataFromMobileNo!.Balance - 10000 < requestModel.Amount)
-                {
-                    message = "Insufficient Amount";
-                    goto InvalidResult;
-                }
 
 
-                dataFromMobileNo.Balance -= requestModel.Amount;
 
-                dataToMobileNo.Balance += requestModel.Amount;
+        //    [HttpGet]
+        //    [ActionName("Transfer")]
+        //    public IActionResult WalletTransfer()
+        //    {
+        //        return View("WalletTransfer");
+        //    }
 
-                string updQuery = @"INSERT INTO [dbo].[Tbl_Transcation]
-           ([TranscationId]
-           ,[TranscationNo]
-           ,[FromMobileNo]
-           ,[ToMobileNo]
-           ,[Amount]
-           ,[TransctationDate])
-     VALUES
-           (@TranscationId
-           ,@TranscationNo
-           ,@FromMobileNo
-           ,@ToMobileNo
-           ,@Amount
-           ,@TransctationDate)";
+        //    [HttpPost]
+        //    [ActionName("Transfer")]
+        //    public async Task<IActionResult> WalletTransfer(TranscationModel requestModel)
+        //    {
+        //        bool isSuccess = false;
+        //        string message = string.Empty;
+        //        if (!requestModel.FromMobileNo.IsNullOrEmptyV3())
+        //        {
+        //            message = "From Mobile No is Required";
+        //            goto InvalidResult;
+        //        }
+        //        if (!requestModel.ToMobileNo.IsNullOrEmptyV3())
+        //        {
+        //            message = "To mobile No is required";
+        //            goto InvalidResult;
+        //        }
+        //        if (requestModel.Amount <= 0)
+        //        {
+        //            message = "Amount is invalid";
+        //            goto InvalidResult;
+        //        }
 
-                TranscationModel responseModel = new TranscationModel()
-                {
-                    FromMobileNo = dataFromMobileNo.MobileNo,
-                    ToMobileNo = dataToMobileNo.MobileNo,
-                    Amount = requestModel.Amount,
-                    TransctationDate = DateTime.Now,
-                    TranscationNo = DateTime.Now.ToString("yyyyMMdd_hhmmss_fff"),
-                    TranscationId = Ulid.NewUlid().ToString(),
-                };
+        //        using (IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString))
+        //        {
+        //            db.Open();
+        //            string getQuery = "select * from Tbl_Wallet where MobileNo = @MobileNo;";
 
-                int result = await db.ExecuteAsync(updQuery, responseModel);
+        //            var dataFromMobileNo = await db.QueryFirstOrDefaultAsync<WalletModel>(getQuery, new
+        //            {
+        //                MobileNo = requestModel.FromMobileNo
+        //            });
 
-                isSuccess = result > 0;
-                message = isSuccess ? "Transfer Success" : "Transter Fail";
-            }
+        //            if (dataFromMobileNo is null)
+        //            {
+        //                message = "From Mobile No is Invalid";
+        //                goto InvalidResult;
+        //            }
 
-        Result:
+        //            var dataToMobileNo = await db.QueryFirstOrDefaultAsync<WalletModel>(getQuery, new
+        //            {
+        //                MobileNo = requestModel.ToMobileNo
+        //            });
+        //            if (dataToMobileNo is null)
+        //            {
+        //                message = "To Mobile No is Invalid";
+        //                goto InvalidResult;
+        //            }
 
-            TempData["IsSuccess"] = isSuccess;
-            TempData["Message"] = message;
+        //            if (dataFromMobileNo!.Balance - 10000 < requestModel.Amount)
+        //            {
+        //                message = "Insufficient Amount";
+        //                goto InvalidResult;
+        //            }
 
-            return View("TranscationHistory", requestModel);
 
-        InvalidResult:
-            TempData["IsSuccess"] = false;
-            TempData["Message"] = message;
-            return RedirectToAction("Transfer");
-        }
+        //            dataFromMobileNo.Balance -= requestModel.Amount;
+
+        //            dataToMobileNo.Balance += requestModel.Amount;
+
+        //            string updQuery = @"INSERT INTO [dbo].[Tbl_Transcation]
+        //       ([TranscationId]
+        //       ,[TranscationNo]
+        //       ,[FromMobileNo]
+        //       ,[ToMobileNo]
+        //       ,[Amount]
+        //       ,[TransctationDate])
+        // VALUES
+        //       (@TranscationId
+        //       ,@TranscationNo
+        //       ,@FromMobileNo
+        //       ,@ToMobileNo
+        //       ,@Amount
+        //       ,@TransctationDate)";
+
+        //            TranscationModel responseModel = new TranscationModel()
+        //            {
+        //                FromMobileNo = dataFromMobileNo.MobileNo,
+        //                ToMobileNo = dataToMobileNo.MobileNo,
+        //                Amount = requestModel.Amount,
+        //                TransctationDate = DateTime.Now,
+        //                TranscationNo = DateTime.Now.ToString("yyyyMMdd_hhmmss_fff"),
+        //                TranscationId = Ulid.NewUlid().ToString(),
+        //            };
+
+        //            int result = await db.ExecuteAsync(updQuery, responseModel);
+
+        //            isSuccess = result > 0;
+        //            message = isSuccess ? "Transfer Success" : "Transter Fail";
+        //        }
+
+        //    Result:
+
+        //        TempData["IsSuccess"] = isSuccess;
+        //        TempData["Message"] = message;
+
+        //        return View("TranscationHistory", requestModel);
+
+        //    InvalidResult:
+        //        TempData["IsSuccess"] = false;
+        //        TempData["Message"] = message;
+        //        return RedirectToAction("Transfer");
+        //    }
+        //}
     }
 }
-       
 
-    public class WalletModel
+
+public class WalletModel
     {
         public int WalletId { get; set; }
         public string WalletUserName { get; set; }

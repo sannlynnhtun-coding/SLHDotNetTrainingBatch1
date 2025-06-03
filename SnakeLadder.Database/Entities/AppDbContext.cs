@@ -23,7 +23,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<TblSnake> TblSnakes { get; set; }
 
-   
+  
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -45,9 +45,11 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<TblPlayerPosition>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Tbl_PlayerPosition");
+            entity.HasKey(e => e.PlayerPositionId);
+
+            entity.ToTable("Tbl_PlayerPosition");
+
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
         });
 
         modelBuilder.Entity<TblSnake>(entity =>

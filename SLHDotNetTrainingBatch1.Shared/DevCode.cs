@@ -12,9 +12,9 @@ namespace SLHDotNetTrainingBatch1.Shared
         public static bool IsNullOrEmptyV2(this string? str)
         {
             return 
-                str != null && 
-                !string.IsNullOrEmpty(str.Trim()) && 
-                !string.IsNullOrWhiteSpace(str.Trim());
+                str == null &&
+               string.IsNullOrEmpty(str.Trim()) &&
+               string.IsNullOrWhiteSpace(str.Trim());
         }
 
         public static string ToJson(this object obj)
