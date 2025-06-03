@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SLHDotNetTrainingBatch1.Shared\SLHDotNetTrainingBatch1.Shared.csproj" />
     <ProjectReference Include="..\SnakeLadder.Database\SnakeLadder.Database.csproj" />
   </ItemGroup>
 
