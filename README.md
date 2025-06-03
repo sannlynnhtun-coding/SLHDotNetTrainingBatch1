@@ -27,35 +27,6 @@
 
 ---
 
-## 🔐 Login Form
-
-* **Fields**:
-
-  * Username
-  * Password
-
-* **Buttons**:
-
-  * `Login`
-
-    * Get values from TextBoxes (Trim)
-    * Read from database
-    * Use ADO.NET (CRUD)
-  * `Cancel`
-
----
-
-## 🗃️ Database
-
-* **Tables**
-
-  * User (Username, Password)
-* **Features**
-
-  * Data Fill
-
----
-
 ## 🔗 Gist Link
 
 [https://gist.github.com/sannlynnhtun-coding](https://gist.github.com/sannlynnhtun-coding)
