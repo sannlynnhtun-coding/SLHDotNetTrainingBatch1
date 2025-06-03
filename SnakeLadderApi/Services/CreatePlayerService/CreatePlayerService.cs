@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+
 using SLHDotNetTrainingBatch1.Shared;
 using SnakeLadder.Database.Entities;
 using SnakeLadderApi.Models;
@@ -7,18 +8,18 @@ using SnakeLadderApi.Models.CreatePlayer;
 
 namespace SnakeLadderApi.Services.CreatePlayerService
 {
-    public class CreatePlyerService
+    public class CreatePlayerService
     {
 
         private readonly AppDbContext _context;
 
-        public CreatePlyerService(AppDbContext context)
+        public CreatePlayerService(AppDbContext context)
         {
             _context = context;
         }
 
         CreateResponseModel model;
-        public BasedResponseModel CreatePlayerService(CreateRequestModel requestModel)
+        public BasedResponseModel CreatePlayer(CreateRequestModel requestModel)
         {
             if(requestModel.PlayerName.IsNullOrEmptyV2())
             {
@@ -31,10 +32,13 @@ namespace SnakeLadderApi.Services.CreatePlayerService
 
              var item = _context.TblPlayers.Add(new TblPlayer
             {
-                PlayerName = requestModel.PlayerName,
+                PlayerName = requestModel.PlayerName!.Trim(),
             });
-           
-            if(item is null)
+
+
+            _context.SaveChanges();
+
+            if (item is null)
             {
                   var model = new BasedResponseModel
                 {
@@ -45,12 +49,9 @@ namespace SnakeLadderApi.Services.CreatePlayerService
             {
                 IsSuccess = true,
                 Message = "Success To Create",
-                PlayerName = requestModel.PlayerName,
+                PlayerName = requestModel.PlayerName.Trim(),
             };
             return model;
-
-
-
         }
     }
 }

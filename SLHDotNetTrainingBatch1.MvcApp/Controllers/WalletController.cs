@@ -34,7 +34,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         {
             using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
             db.Open();
-            var lst = await db.QueryAsync<TranscationModel>("select * from Tbl_Transcation");
+            var lst = await db.QueryAsync<TranscationModel>("select * from Tbl_Transaction");
             return View("HistoryIndex", lst.ToList());
         }
 
@@ -156,29 +156,27 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
         }
 
 
-        [HttpGet]
         [ActionName("Delete")]
+
         public async Task<IActionResult> WalletDelete(int id)
         {
-            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
             db.Open();
+            string query = "DELETE FROM Tbl_Wallet WHERE WalletId = @WalletId";
 
-            string query = @"SELECT [WalletId]
-      ,[WalletUserName]
-      ,[FullName]
-      ,[MobileNo]
-      ,[Balance]
-  FROM [dbo].[Tbl_Wallet]
-  where WalletId = @WalletId";
-            //var model = await db.QueryFirstOrDefaultAsync<WalletModel>(query, new { WalletId = id });
+            var result = await db.ExecuteAsync(query, new { WalletId = id });
 
-            var result = 1;
-            if (result == 0)
+            if (result > 0)
             {
-                TempData["IsSuccess"] = false;
-                TempData["Message"] = "No data found.";
-                return RedirectToAction("Index");
+                TempData["isSuccess"] = true;
+                TempData["message"] = "Wallet deleted successfully";
             }
+            else
+            {
+                TempData["isSuccess"] = false;
+                TempData["message"] = "Failed to delete wallet";
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -438,7 +436,7 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
                 var Balance = await db.QueryFirstOrDefaultAsync<WalletCheckBalanceResponseModel>(query, requestModel);
 
                 TempData["isSuccess"] = true;
-                TempData["message"] = $"Your balance is {Balance.Balance}";
+                TempData["message"] = $"Your balance is {Balance.Balance.ToString("n0")}";
             }
             else
             {
@@ -449,7 +447,8 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
             return RedirectToAction("check-balance");
         }
 
-    
+
+
 
         [HttpGet]
         [ActionName("Transfer")]
