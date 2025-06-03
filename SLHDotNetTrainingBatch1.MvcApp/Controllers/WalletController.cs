@@ -450,120 +450,121 @@ namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
 
 
 
-        [HttpGet]
-        [ActionName("Transfer")]
-        public IActionResult WalletTransfer()
-        {
-            return View("WalletTransfer");
-        }
+        //    [HttpGet]
+        //    [ActionName("Transfer")]
+        //    public IActionResult WalletTransfer()
+        //    {
+        //        return View("WalletTransfer");
+        //    }
 
-        [HttpPost]
-        [ActionName("Transfer")]
-        public async Task<IActionResult> WalletTransfer(TranscationModel requestModel)
-        {
-            bool isSuccess = false;
-            string message = string.Empty;
-            if (!requestModel.FromMobileNo.IsNullOrEmptyV3())
-            {
-                message = "From Mobile No is Required";
-                goto InvalidResult;
-            }
-            if (!requestModel.ToMobileNo.IsNullOrEmptyV3())
-            {
-                message = "To mobile No is required";
-                goto InvalidResult;
-            }
-            if (requestModel.Amount <= 0)
-            {
-                message = "Amount is invalid";
-                goto InvalidResult;
-            }
+        //    [HttpPost]
+        //    [ActionName("Transfer")]
+        //    public async Task<IActionResult> WalletTransfer(TranscationModel requestModel)
+        //    {
+        //        bool isSuccess = false;
+        //        string message = string.Empty;
+        //        if (!requestModel.FromMobileNo.IsNullOrEmptyV3())
+        //        {
+        //            message = "From Mobile No is Required";
+        //            goto InvalidResult;
+        //        }
+        //        if (!requestModel.ToMobileNo.IsNullOrEmptyV3())
+        //        {
+        //            message = "To mobile No is required";
+        //            goto InvalidResult;
+        //        }
+        //        if (requestModel.Amount <= 0)
+        //        {
+        //            message = "Amount is invalid";
+        //            goto InvalidResult;
+        //        }
 
-            using (IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString))
-            {
-                db.Open();
-                string getQuery = "select * from Tbl_Wallet where MobileNo = @MobileNo;";
+        //        using (IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString))
+        //        {
+        //            db.Open();
+        //            string getQuery = "select * from Tbl_Wallet where MobileNo = @MobileNo;";
 
-                var dataFromMobileNo = await db.QueryFirstOrDefaultAsync<WalletModel>(getQuery, new
-                {
-                    MobileNo = requestModel.FromMobileNo
-                });
+        //            var dataFromMobileNo = await db.QueryFirstOrDefaultAsync<WalletModel>(getQuery, new
+        //            {
+        //                MobileNo = requestModel.FromMobileNo
+        //            });
 
-                if (dataFromMobileNo is null)
-                {
-                    message = "From Mobile No is Invalid";
-                    goto InvalidResult;
-                }
+        //            if (dataFromMobileNo is null)
+        //            {
+        //                message = "From Mobile No is Invalid";
+        //                goto InvalidResult;
+        //            }
 
-                var dataToMobileNo = await db.QueryFirstOrDefaultAsync<WalletModel>(getQuery, new
-                {
-                    MobileNo = requestModel.ToMobileNo
-                });
-                if (dataToMobileNo is null)
-                {
-                    message = "To Mobile No is Invalid";
-                    goto InvalidResult;
-                }
+        //            var dataToMobileNo = await db.QueryFirstOrDefaultAsync<WalletModel>(getQuery, new
+        //            {
+        //                MobileNo = requestModel.ToMobileNo
+        //            });
+        //            if (dataToMobileNo is null)
+        //            {
+        //                message = "To Mobile No is Invalid";
+        //                goto InvalidResult;
+        //            }
 
-                if (dataFromMobileNo!.Balance - 10000 < requestModel.Amount)
-                {
-                    message = "Insufficient Amount";
-                    goto InvalidResult;
-                }
+        //            if (dataFromMobileNo!.Balance - 10000 < requestModel.Amount)
+        //            {
+        //                message = "Insufficient Amount";
+        //                goto InvalidResult;
+        //            }
 
 
-                dataFromMobileNo.Balance -= requestModel.Amount;
+        //            dataFromMobileNo.Balance -= requestModel.Amount;
 
-                dataToMobileNo.Balance += requestModel.Amount;
+        //            dataToMobileNo.Balance += requestModel.Amount;
 
-                string updQuery = @"INSERT INTO [dbo].[Tbl_Transcation]
-           ([TranscationId]
-           ,[TranscationNo]
-           ,[FromMobileNo]
-           ,[ToMobileNo]
-           ,[Amount]
-           ,[TransctationDate])
-     VALUES
-           (@TranscationId
-           ,@TranscationNo
-           ,@FromMobileNo
-           ,@ToMobileNo
-           ,@Amount
-           ,@TransctationDate)";
+        //            string updQuery = @"INSERT INTO [dbo].[Tbl_Transcation]
+        //       ([TranscationId]
+        //       ,[TranscationNo]
+        //       ,[FromMobileNo]
+        //       ,[ToMobileNo]
+        //       ,[Amount]
+        //       ,[TransctationDate])
+        // VALUES
+        //       (@TranscationId
+        //       ,@TranscationNo
+        //       ,@FromMobileNo
+        //       ,@ToMobileNo
+        //       ,@Amount
+        //       ,@TransctationDate)";
 
-                TranscationModel responseModel = new TranscationModel()
-                {
-                    FromMobileNo = dataFromMobileNo.MobileNo,
-                    ToMobileNo = dataToMobileNo.MobileNo,
-                    Amount = requestModel.Amount,
-                    TransctationDate = DateTime.Now,
-                    TranscationNo = DateTime.Now.ToString("yyyyMMdd_hhmmss_fff"),
-                    TranscationId = Ulid.NewUlid().ToString(),
-                };
+        //            TranscationModel responseModel = new TranscationModel()
+        //            {
+        //                FromMobileNo = dataFromMobileNo.MobileNo,
+        //                ToMobileNo = dataToMobileNo.MobileNo,
+        //                Amount = requestModel.Amount,
+        //                TransctationDate = DateTime.Now,
+        //                TranscationNo = DateTime.Now.ToString("yyyyMMdd_hhmmss_fff"),
+        //                TranscationId = Ulid.NewUlid().ToString(),
+        //            };
 
-                int result = await db.ExecuteAsync(updQuery, responseModel);
+        //            int result = await db.ExecuteAsync(updQuery, responseModel);
 
-                isSuccess = result > 0;
-                message = isSuccess ? "Transfer Success" : "Transter Fail";
-            }
+        //            isSuccess = result > 0;
+        //            message = isSuccess ? "Transfer Success" : "Transter Fail";
+        //        }
 
-        Result:
+        //    Result:
 
-            TempData["IsSuccess"] = isSuccess;
-            TempData["Message"] = message;
+        //        TempData["IsSuccess"] = isSuccess;
+        //        TempData["Message"] = message;
 
-            return View("TranscationHistory", requestModel);
+        //        return View("TranscationHistory", requestModel);
 
-        InvalidResult:
-            TempData["IsSuccess"] = false;
-            TempData["Message"] = message;
-            return RedirectToAction("Transfer");
-        }
+        //    InvalidResult:
+        //        TempData["IsSuccess"] = false;
+        //        TempData["Message"] = message;
+        //        return RedirectToAction("Transfer");
+        //    }
+        //}
     }
 }
-       
 
-    public class WalletModel
+
+public class WalletModel
     {
         public int WalletId { get; set; }
         public string WalletUserName { get; set; }
