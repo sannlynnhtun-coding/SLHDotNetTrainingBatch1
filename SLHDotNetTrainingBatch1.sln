@@ -68,6 +68,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeLadderApi", "SnakeLadd
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SnakeLadderApiProject", "SnakeLadderApiProject", "{1699DE28-A003-4A0F-859E-6F7E9F0D1C01}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.MvcApp3", "SLHDotNetTrainingBatch1.MvcApp3\SLHDotNetTrainingBatch1.MvcApp3.csproj", "{6C94CBF4-B27C-4BBF-AF77-3C3EF3DE8564}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -166,6 +168,10 @@ Global
 		{CE2243B3-2140-F5B8-DBBF-D700646AD228}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE2243B3-2140-F5B8-DBBF-D700646AD228}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE2243B3-2140-F5B8-DBBF-D700646AD228}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C94CBF4-B27C-4BBF-AF77-3C3EF3DE8564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C94CBF4-B27C-4BBF-AF77-3C3EF3DE8564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C94CBF4-B27C-4BBF-AF77-3C3EF3DE8564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C94CBF4-B27C-4BBF-AF77-3C3EF3DE8564}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -194,6 +200,7 @@ Global
 		{938CD471-D774-434E-8D02-9F3F7D35A5A8} = {9A50D5C9-1787-4359-A2EA-6B8971BBD737}
 		{1B4D1BAC-62BE-C367-9088-28023CCA518A} = {1699DE28-A003-4A0F-859E-6F7E9F0D1C01}
 		{CE2243B3-2140-F5B8-DBBF-D700646AD228} = {1699DE28-A003-4A0F-859E-6F7E9F0D1C01}
+		{6C94CBF4-B27C-4BBF-AF77-3C3EF3DE8564} = {9A50D5C9-1787-4359-A2EA-6B8971BBD737}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBBEB5F0-9B32-42E2-ADCC-EE610898DA60}
