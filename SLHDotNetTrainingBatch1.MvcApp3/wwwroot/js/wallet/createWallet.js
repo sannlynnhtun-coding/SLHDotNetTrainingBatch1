@@ -17,8 +17,17 @@
                 return;
             }
 
-            alert(response.Message);
-            window.location.href = "/Wallet/Index";
+            //alert(response.Message);
+
+            //Swal.fire({
+            //    title: "Success",
+            //    text: response.Message,
+            //    icon: "success"
+            //});
+
+            successMessage(response.Message, "/Wallet/Index");
+
+            //window.location.href = "/Wallet/Index";
 
             //$("#createModal").modal("hide");
             //loadData();
