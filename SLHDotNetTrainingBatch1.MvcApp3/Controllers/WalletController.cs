@@ -40,6 +40,30 @@ namespace SLHDotNetTrainingBatch1.MvcApp3.Controllers
             }
         }
 
+        [HttpGet]
+        [ActionName("Edit")]
+        public async Task<IActionResult> WalletEdit(int id)
+        {
+            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            db.Open();
+
+            string query = @"SELECT [WalletId]
+      ,[WalletUserName]
+      ,[FullName]
+      ,[MobileNo]
+      ,[Balance]
+  FROM [dbo].[Tbl_Wallet]
+  where WalletId = @WalletId";
+            var model = await db.QueryFirstOrDefaultAsync<WalletModel>(query, new { WalletId = id });
+            if (model is null)
+            {
+                TempData["IsSuccess"] = false;
+                TempData["Message"] = "No data found.";
+                return RedirectToAction("Index");
+            }
+            return View("WalletEdit", model);
+        }
+
         [ActionName("Create")]
         public IActionResult WalletCreate()
         {
@@ -92,14 +116,63 @@ namespace SLHDotNetTrainingBatch1.MvcApp3.Controllers
                 return Json(new { IsSuccess = false, Message = ex.ToString() });
             }
         }
-    }
 
-    public class WalletModel
-    {
-        public int WalletId { get; set; }
-        public string WalletUserName { get; set; }
-        public string FullName { get; set; }
-        public string MobileNo { get; set; }
-        public decimal Balance { get; set; }
+        [HttpPost]
+        [ActionName("Update")]
+        public async Task<IActionResult> WalletUpdate(WalletModel requestModel)
+        {
+            try
+            {
+                using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+                db.Open();
+
+                var conditions = string.Empty;
+                if (!string.IsNullOrEmpty(requestModel.WalletUserName))
+                {
+                    conditions += " [WalletUserName] = @WalletUserName, ";
+                }
+                if (!string.IsNullOrEmpty(requestModel.FullName))
+                {
+                    conditions += " [FullName] = @FullName, ";
+                }
+                if (!string.IsNullOrEmpty(requestModel.MobileNo))
+                {
+                    conditions += " [MobileNo] = @MobileNo, ";
+                }
+                if (requestModel.Balance > 0)
+                {
+                    conditions += " [Balance] = @Balance, ";
+                }
+                conditions = conditions.Substring(0, conditions.Length - 2);
+                string query = $@"UPDATE [dbo].[Tbl_Wallet]
+                     SET {conditions}
+                     WHERE [WalletId] = @WalletId";
+
+                var parameters = new
+                {
+                    WalletId = requestModel.WalletId,
+                    WalletUserName = requestModel.WalletUserName,
+                    FullName = requestModel.FullName,
+                    MobileNo = requestModel.MobileNo,
+                    Balance = requestModel.Balance,
+                };
+                var result = await db.ExecuteAsync(query, parameters);
+                return Json(new { IsSuccess = result > 0, Message = result > 0 ? "Success" : "Fail" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { IsSuccess = false, Message = ex.ToString() });
+            }
+        }
     }
 }
+
+public class WalletModel
+{
+    public int WalletId { get; set; }
+    public string WalletUserName { get; set; }
+    public string FullName { get; set; }
+    public string MobileNo { get; set; }
+    public decimal Balance { get; set; }
+}
+

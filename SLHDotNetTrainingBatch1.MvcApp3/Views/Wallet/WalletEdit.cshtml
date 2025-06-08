@@ -1,0 +1,61 @@
+﻿@model WalletModel
+@{
+    ViewData["WalletUserName"] = "Update Wallet";
+}
+<h1>Update Wallet</h1>
+
+<form method="post" action="/Wallet/Update/@Model.WalletId">
+    <div class="mb-3">
+        <label for="txtWalletUserName" class="form-label">Wallet UserName</label>
+        <input type="text" name="WalletUserName" value="@Model.WalletUserName" class="form-control" id="txtWalletUserName">
+    </div>
+    <div class="mb-3">
+        <label for="txtFullName" class="form-label">FullName</label>
+        <input type="text" name="FullName" value="@Model.FullName" class="form-control" id="txtFullName">
+    </div>
+    <div class="mb-3">
+        <label for="txtMobileNo" class="form-label">Mobile No</label>
+        <input type="text" name="MobileNo" value="@Model.MobileNo" class="form-control" id="txtMobileNo">
+    </div>
+    <div class="mb-3">
+        <label for="txtBalance" class="form-label">Balance</label>
+        <input type="text" name="Balance" value="@Model.Balance" class="form-control" id="txtBalance">
+    </div>
+    <a href="/Wallet/Index" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-success" id="btnUpdate">Update</button>
+</form>
+
+
+@section scripts {
+    <script>
+        $('#btnUpdate').click(function () {
+            const id = $(this).data('id');
+            let item = {
+                WalletId: @Model.WalletId,
+                WalletUserName: $('#txtWalletUserName').val(),
+                FullName: $('#txtFullName').val(),
+                MobileNo: $('#txtMobileNo').val(),
+                Balance: $('#txtBalance').val()
+            };
+
+            $.ajax({
+                url: "/Wallet/Update",
+                type: "POST",
+                data: { requestModel: item },
+                success: function (response) {
+                    console.log({ response });
+                    if (!response.IsSuccess) {
+                        alert("Error: " + response.Message);
+                        return;
+                    }
+
+                    alert(response.Message);
+                    window.location.href = "/Wallet/Index";
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
+                }
+            });
+        })
+    </script>
+}
