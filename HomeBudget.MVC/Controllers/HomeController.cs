@@ -1,8 +1,8 @@
-using HomeBudget.Presentation.Models;
+using HomeBudget.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace HomeBudget.Presentation.Controllers
+namespace HomeBudget.MVC.Controllers
 {
     public class HomeController : Controller
     {

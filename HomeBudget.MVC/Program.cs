@@ -1,4 +1,8 @@
-namespace HomeBudget.Presentation
+using HomeBudget.BusinessLogic.Services.BudgetService.CreateBudgetFeature;
+using HomeBudget.Database.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace HomeBudget.MVC
 {
     public class Program
     {
@@ -7,13 +11,14 @@ namespace HomeBudget.Presentation
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews().AddJsonOptions(opt =>
-            {
-                opt.JsonSerializerOptions.PropertyNamingPolicy = null; // Disable camelCase naming policy
-            }
-            );
+            builder.Services.AddControllersWithViews();
 
+            builder.Services.AddScoped<CreateBudgetService>();
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
             var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

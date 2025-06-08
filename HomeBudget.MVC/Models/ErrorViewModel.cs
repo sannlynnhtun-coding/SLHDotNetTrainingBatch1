@@ -1,4 +1,4 @@
-namespace HomeBudget.Presentation.Models
+namespace HomeBudget.MVC.Models
 {
     public class ErrorViewModel
     {
