@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["WalletUserName"] = "Update Wallet";
+}
+<h1>Update Wallet</h1>
+
+<div class="mb-3">
+    <label for="txtWalletUserName" class="form-label">WalletUserName</label>
+    <input type="text" name="WalletUserName" class="form-control" id="txtWalletUserName">
+</div>
+<div class="mb-3">
+    <label for="txtFullName" class="form-label">FullName</label>
+    <input type="text" name="FullName" class="form-control" id="txtFullName">
+</div>
+<div class="mb-3">
+    <label for="txtMobileNo" class="form-label">MobileNo</label>
+    <input type="text" name="MobileNo" class="form-control" id="txtMobileNo">
+</div>
+<div class="mb-3">
+    <label for="txtBalance" class="form-label">Balance</label>
+    <input type="text" name="Balance" class="form-control" id="txtBalance">
+</div>
+<button type="button" class="btn btn-secondary">Cancel</button>
+<button type="button" class="btn btn-success" id="btnUpdate">Update</button>
+
+@section scripts {
+    <script src="~/js/wallet/createwallet.js"></script>
+    <script>
+        $('#btnSave').click(function () {
+            let item = {
+                WalletUserName: $('#txtWalletUserName').val(),
+                FullName: $('#txtFullName').val(),
+                MobileNo: $('#txtMobileNo').val(),
+                Balance: $('#txtBalance').val()
+            };
+
+            $.ajax({
+                url: "/Wallet/Save",
+                type: "POST",
+                data: { requestModel: item },
+                success: function (response) {
+                    console.log({ response });
+                    if (!response.IsSuccess) {
+                        alert("Error: " + response.Message);
+                        return;
+                    }
+
+                    alert(response.Message);
+                    window.location.href = "/Wallet/Index";
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
+                }
+            });
+        })
+    </script>
+}
