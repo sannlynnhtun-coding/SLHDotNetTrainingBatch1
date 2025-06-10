@@ -1,0 +1,26 @@
+﻿@model List<WalletModel>
+@{
+    int count = 0;
+}
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>User Name</th>
+            <th>Mobile No</th>
+            <th>Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@(++count)</td>
+                <td>@item.WalletUserName</td>
+                <td>@item.MobileNo</td>
+                <td>@item.Balance</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,42 @@
+﻿@model ApexChartPieChartViewModel
+@using Newtonsoft.Json
+@using SLHDotNetTrainingBatch1.MvcApp3.Controllers
+@{
+    List<int> series = Model.Series;
+    List<string> labels = Model.Labels;
+    // List<int> series = new List<int> { 44, 55, 13, 43, 22 };
+    // List<string> labels = new List<string> { "Team A", "Team B", "Team C", "Team D", "Team E" };
+}
+
+<div id="chart">
+</div>
+
+@section scripts {
+    <script>
+        const _series = @JsonConvert.SerializeObject(series)
+        const _labels =  @Html.Raw(JsonConvert.SerializeObject(labels))
+
+         var options = {
+          series: _series,
+          chart: {
+          width: 380,
+          type: 'pie',
+        },
+        labels: _labels,
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    </script>
+}
