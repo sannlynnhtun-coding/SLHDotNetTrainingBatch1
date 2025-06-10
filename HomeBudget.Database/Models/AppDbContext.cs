@@ -19,7 +19,8 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<TblExpense> TblExpenses { get; set; }
 
-    
+   
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TblBudget>(entity =>
@@ -28,9 +29,10 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("Tbl_Budget");
 
-            entity.Property(e => e.Amount).HasColumnType("decimal(18, 0)");
-            entity.Property(e => e.BudgetName).HasMaxLength(200);
-            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.BudgetName).HasMaxLength(50);
+            entity.Property(e => e.CreateDate).HasColumnType("datetime");
+            entity.Property(e => e.OriginalAmount).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.UpdatedAmount).HasColumnType("decimal(18, 0)");
         });
 
         modelBuilder.Entity<TblExpense>(entity =>

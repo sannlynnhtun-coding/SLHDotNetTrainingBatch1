@@ -9,7 +9,9 @@ public partial class TblBudget
 
     public string BudgetName { get; set; } = null!;
 
-    public decimal Amount { get; set; }
+    public decimal OriginalAmount { get; set; }
 
-    public DateTime CreatedDate { get; set; }
+    public decimal UpdatedAmount { get; set; }
+
+    public DateTime CreateDate { get; set; }
 }

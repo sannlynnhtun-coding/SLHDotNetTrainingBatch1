@@ -39,8 +39,19 @@ namespace HomeBudget.BusinessLogic.Services.ExpenseService.CreateExpense
                     Message = "Budget not found"
                 };
             }
+            decimal updatedAmount = 0;
+            if(budgetDeductResult.UpdatedAmount == 0)
+            {
+                updatedAmount = budgetDeductResult.OriginalAmount - requestModel.Amount;
+            }
 
-            budgetDeductResult.Amount -= requestModel.Amount;
+            else
+            {
+                updatedAmount = budgetDeductResult.UpdatedAmount - requestModel.Amount;
+            }
+
+            budgetDeductResult.UpdatedAmount = updatedAmount;
+
 
 
             await _context.SaveChangesAsync();

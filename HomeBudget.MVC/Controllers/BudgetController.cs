@@ -1,4 +1,6 @@
 ﻿using HomeBudget.BusinessLogic.Services.BudgetService.CreateBudgetFeature;
+using HomeBudget.BusinessLogic.Services.BudgetService.GetAllBudgetFeature;
+using HomeBudget.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeBudget.MVC.Controllers
@@ -7,10 +9,27 @@ namespace HomeBudget.MVC.Controllers
     {
         private readonly CreateBudgetService _createBudgetService;
 
-        public BudgetController(CreateBudgetService createBudgetService)
+        private readonly GetAllBudgetService _getBudgetService;
+
+        public BudgetController(CreateBudgetService createBudgetService, GetAllBudgetService getBudgetService)
         {
             _createBudgetService = createBudgetService;
+            _getBudgetService = getBudgetService;
         }
+
+
+        public async Task<IActionResult> IndexAsync()
+        {
+            var result = await _getBudgetService.GetBudgets();
+
+            var response = new BudgetIndexViewModel
+            {
+                BudgetList = result.BudgetList,
+            };
+
+            return View("BudgetIndex", response);
+        }
+
 
         [ActionName("Create")]
         public IActionResult CreateBudgetView()
@@ -25,7 +44,7 @@ namespace HomeBudget.MVC.Controllers
         {
             var result = await _createBudgetService.CreateBudget(requestModel);
 
-            if(result.IsSuccess)
+            if (result.IsSuccess)
             {
                 TempData["SuccessMessage"] = result.Message;
             }
@@ -35,6 +54,8 @@ namespace HomeBudget.MVC.Controllers
             }
             return RedirectToAction("Create");
         }
+
+
 
     }
 }

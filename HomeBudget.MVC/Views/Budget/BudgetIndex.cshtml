@@ -1,0 +1,43 @@
+﻿@model BudgetIndexViewModel
+
+<a href="/Budget/Create" class="btn btn-outline-primary">Create Budget</a>
+
+
+<div class="container mt-4">
+
+    @foreach(var item in Model.BudgetList)
+    {
+        <div class="card  mt-4">
+            <div class="card-header ">
+                <span class="h2">@item.Name</span>
+
+                <span class="float-end text-success fw-bold">@item.OriginalAmount.ToString("N0") Bugeted</span>
+            </div>
+            <div class="card-body">
+                @{
+                    bool isOver90 = Convert.ToInt32(item.SpentPercentage) > 90 ? true : false;
+
+                    bool isOver60 = Convert.ToInt32(item.SpentPercentage) > 60 ? true : false;
+
+                    bool isSpent = item.UpdatedAmount == 0 ? false : true;
+                }
+                <div class="progress mt-5 " role="progressbar" aria-label="basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar @(isOver90 ? "bg-danger" : isOver60 ? "bg-warning text-dark"  : "bg-success")" style="width: @(item.SpentPercentage)%">@(item.SpentPercentage)%</div>
+                </div>
+
+                <span class="float-start fw-bolder">@(isSpent ?  (item.OriginalAmount - item.UpdatedAmount).ToString("N0") : "0") spent</span>
+                <span class="float-end">@( isSpent ? item.UpdatedAmount.ToString("N0") : item.OriginalAmount.ToString("N0") )Remaining</span>
+
+
+                <div class="mt-5">
+                    <a href="/Wallet/@item.BudgetId" class="btn btn-outline-secondary">Go Details</a>
+                </div>
+               
+            </div>
+
+
+            
+        </div>
+    }
+
+</div>

@@ -1,4 +1,5 @@
 using HomeBudget.BusinessLogic.Services.BudgetService.CreateBudgetFeature;
+using HomeBudget.BusinessLogic.Services.BudgetService.GetAllBudgetFeature;
 using HomeBudget.BusinessLogic.Services.ExpenseService.CreateExpense;
 using HomeBudget.BusinessLogic.Services.ExpenseService.GetExpenseNameService;
 using HomeBudget.Database.Models;
@@ -22,6 +23,7 @@ namespace HomeBudget.MVC
             builder.Services.AddScoped<GetExpenseNameService>();
 
             builder.Services.AddScoped<CreateExpenseService>();
+            builder.Services.AddScoped<GetAllBudgetService>();
 
 
 
