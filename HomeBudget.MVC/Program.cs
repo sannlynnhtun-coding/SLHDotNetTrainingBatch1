@@ -1,5 +1,8 @@
 using HomeBudget.BusinessLogic.Services.BudgetService.CreateBudgetFeature;
-using HomeBudget.Database.Entities;
+using HomeBudget.BusinessLogic.Services.BudgetService.GetAllBudgetFeature;
+using HomeBudget.BusinessLogic.Services.ExpenseService.CreateExpense;
+using HomeBudget.BusinessLogic.Services.ExpenseService.GetExpenseNameService;
+using HomeBudget.Database.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace HomeBudget.MVC
@@ -12,11 +15,18 @@ namespace HomeBudget.MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
 
             builder.Services.AddScoped<CreateBudgetService>();
 
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
+            builder.Services.AddScoped<GetExpenseNameService>();
+
+            builder.Services.AddScoped<CreateExpenseService>();
+            builder.Services.AddScoped<GetAllBudgetService>();
+
+
+
             var app = builder.Build();
 
 

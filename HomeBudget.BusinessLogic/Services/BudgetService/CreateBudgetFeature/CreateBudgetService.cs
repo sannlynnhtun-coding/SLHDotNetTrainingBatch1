@@ -1,4 +1,5 @@
-﻿using HomeBudget.Database.Entities;
+﻿
+using HomeBudget.Database.Models;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,14 @@ namespace HomeBudget.BusinessLogic.Services.BudgetService.CreateBudgetFeature
         public async Task<CreateBudgetResponseModel> CreateBudget(CreateBudgetRequestModel requestModel)
         {
 
+            var _budgetamount = requestModel.Amount;
 
             var result = await _context.TblBudgets.AddAsync(new TblBudget
             {
                 BudgetName = requestModel.Name,
-                Amount = requestModel.Amount,
-                CreatedDate = DateTime.UtcNow
+                OriginalAmount = requestModel.Amount,
+                UpdatedAmount = 0,
+                CreateDate = DateTime.UtcNow
             });
 
             var saveResult = await _context.SaveChangesAsync();
