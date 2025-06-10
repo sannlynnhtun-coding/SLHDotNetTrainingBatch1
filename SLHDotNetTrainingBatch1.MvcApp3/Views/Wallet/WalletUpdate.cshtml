@@ -1,7 +1,7 @@
 ﻿@{
-    ViewData["WalletUserName"] = "New Wallet";
+    ViewData["WalletUserName"] = "Update Wallet";
 }
-<h1>New Wallet</h1>
+<h1>Update Wallet</h1>
 
 <div class="mb-3">
     <label for="txtWalletUserName" class="form-label">WalletUserName</label>
@@ -20,17 +20,12 @@
     <input type="text" name="Balance" class="form-control" id="txtBalance">
 </div>
 <button type="button" class="btn btn-secondary">Cancel</button>
-@* <button type="button" class="btn btn-success" id="btnSave">Save</button> *@
-<button class="btn btn-success ladda-button" data-size="s" data-style="expand-left" id="btnSave">
-    <span class="ladda-label">Save</span>
-</button>
+<button type="button" class="btn btn-success" id="btnUpdate">Update</button>
 
 @section scripts {
     <script src="~/js/wallet/createwallet.js"></script>
     <script>
-    </script>
-    @* <script>
-        $('#btnSave').click(function(){
+        $('#btnSave').click(function () {
             let item = {
                 WalletUserName: $('#txtWalletUserName').val(),
                 FullName: $('#txtFullName').val(),
@@ -38,16 +33,16 @@
                 Balance: $('#txtBalance').val()
             };
 
-             $.ajax({
+            $.ajax({
                 url: "/Wallet/Save",
                 type: "POST",
-                data: { requestModel : item },
+                data: { requestModel: item },
                 success: function (response) {
-                    console.log({response});
-                     if(!response.IsSuccess){
-                          alert("Error: " + response.Message);
-                          return;
-                     }
+                    console.log({ response });
+                    if (!response.IsSuccess) {
+                        alert("Error: " + response.Message);
+                        return;
+                    }
 
                     alert(response.Message);
                     window.location.href = "/Wallet/Index";
@@ -57,5 +52,5 @@
                 }
             });
         })
-    </script> 
+    </script>
 }

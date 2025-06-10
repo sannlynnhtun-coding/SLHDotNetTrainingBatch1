@@ -54,35 +54,34 @@
     <script>
         loadData();
 
-        function loadData(){
-             $.ajax({
+        function loadData() {
+            $.ajax({
                 url: "/Wallet/Index",
                 type: "POST",
                 success: function (response) {
-                    console.log({response});
+                    console.log({ response });
 
                     $('#tbDataTable').html('');
 
                     let count = 0;
-                    for(let i = 0; i < response.Data.length; i++){
+                    for (let i = 0; i < response.Data.length; i++) {
                         console.log(response.Data[i]);
 
                         const item = response.Data[i];
                         let row = `
-                            <tr>
-                                <td>
-                                    <a href="/Wallet/Edit/${item.WalletId}" class="btn btn-outline-warning">Edit</a>
-                                    <button data-id="${item.WalletId}" class="btn-delete btn btn-outline-danger">Delete</button>
-                                </td>
-                                <td>${++count}</td>
-                                <td>${item.WalletUserName}</td>
-                                <td>${item.MobileNo}</td>
-                                <td>${item.Balance}</td>
-                            </tr>
-                            `;
+                                    <tr>
+                                        <td>
+                                            <a href="/Wallet/Edit/${item.WalletId}" data-id="${item.WalletId}" class="btn btn-outline-warning">Edit</a>
+                                            <button data-id="${item.WalletId}" class="btn-delete btn btn-outline-danger">Delete</button>
+                                        </td>
+                                        <td>${++count}</td>
+                                        <td>${item.WalletUserName}</td>
+                                        <td>${item.MobileNo}</td>
+                                        <td>${item.Balance}</td>
+                                    </tr>
+                                    `;
                         $('#tbDataTable').append(row);
                     }
-
                     bindDeleteClick();
 
                     let table = new DataTable('#tb_DataTable');
@@ -93,15 +92,15 @@
             });
         }
 
-        function bindDeleteClick(){
-            $('.btn-delete').click(function(){
+        function bindDeleteClick() {
+            $('.btn-delete').click(function () {
                 const id = $(this).data('id');
                 // if(!confirm("Are you sure you want to delete this wallet?")){
                 //     return;
                 // }
 
                 confirmMessage("Are you sure want to delete?").then((isSuccess) => {
-                    if(!isSuccess) return;
+                    if (!isSuccess) return;
 
                     const item = {
                         WalletId: id
@@ -109,10 +108,10 @@
                     $.ajax({
                         url: `/Wallet/Delete`,
                         type: "POST",
-                        data: {requestModel: item},
+                        data: { requestModel: item },
                         success: function (response) {
-                            console.log({response});
-                            if(!response.IsSuccess){
+                            console.log({ response });
+                            if (!response.IsSuccess) {
                                 alert("Error: " + response.Message);
                                 return;
                             }
