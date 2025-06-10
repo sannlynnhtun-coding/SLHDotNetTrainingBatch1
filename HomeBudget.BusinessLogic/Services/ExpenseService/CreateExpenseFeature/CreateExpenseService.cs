@@ -1,5 +1,6 @@
 ﻿using HomeBudget.BusinessLogic.Services.BudgetService.CreateBudgetFeature;
-using HomeBudget.Database.Entities;
+
+using HomeBudget.Database.Models;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
