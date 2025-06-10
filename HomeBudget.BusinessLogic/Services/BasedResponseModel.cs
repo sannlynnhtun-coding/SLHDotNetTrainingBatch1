@@ -11,5 +11,6 @@ namespace HomeBudget.BusinessLogic.Services
         public Boolean IsSuccess  { get; set; }
 
         public string Message { get; set; }
+        public object Data { get; set; }
     }
 }
