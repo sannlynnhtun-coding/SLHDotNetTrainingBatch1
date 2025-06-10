@@ -18,6 +18,8 @@
 
 <a class="btn btn-outline-primary" href="/wallet/transfer">Transfer</a>
 
+<input type="text" class="form-control date-picker">
+
 <!-- Modal -->
 <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -33,7 +35,7 @@
     </div>
 </div>
 
-<table class="table table-responsive">
+<table class="table table-responsive" id="tb_DataTable">
     <thead>
         <tr>
             <th>Actions</th>
@@ -82,6 +84,8 @@
                     }
 
                     bindDeleteClick();
+
+                    let table = new DataTable('#tb_DataTable');
                 },
                 error: function (request, status, error) {
                     alert(request.responseText);

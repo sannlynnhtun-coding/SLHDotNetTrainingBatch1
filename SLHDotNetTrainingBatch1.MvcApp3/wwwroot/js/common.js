@@ -16,6 +16,8 @@
     //    }
     //});
 
+    Notiflix.Notify.success(message);
+
     Notiflix.Report.success(
         "Success",
         message,
@@ -47,5 +49,24 @@ function confirmMessage(message) {
                 resolve(false);
             }
         );
+    });
+}
+
+function enableLoading() {
+    //Notiflix.Loading.dots();
+
+    Notiflix.Block.circle('.modal-body');
+}
+
+function disableLoading() {
+    //Notiflix.Loading.remove();
+
+    Notiflix.Block.remove('.modal-body');
+}
+
+function setDatePicker() {
+    $('.date-picker').datepicker({
+        format: 'dd-mm-yyyy',
+        autoHide: true
     });
 }

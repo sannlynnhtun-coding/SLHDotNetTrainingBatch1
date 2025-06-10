@@ -20,10 +20,15 @@
     <input type="text" name="Balance" class="form-control" id="txtBalance">
 </div>
 <button type="button" class="btn btn-secondary">Cancel</button>
-<button type="button" class="btn btn-success" id="btnSave">Save</button>
+@* <button type="button" class="btn btn-success" id="btnSave">Save</button> *@
+<button class="btn btn-success ladda-button" data-size="s" data-style="expand-left" id="btnSave">
+    <span class="ladda-label">Save</span>
+</button>
 
 @section scripts {
     <script src="~/js/wallet/createwallet.js"></script>
+    <script>
+    </script>
     @* <script>
         $('#btnSave').click(function(){
             let item = {
