@@ -1,8 +1,9 @@
 using HomeBudget.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
+
 using System.Diagnostics;
 
-namespace HomeBudget.MVC.Controllers
+namespace SLHDotNetTrainingBatch1.MvcApp.Controllers
 {
     public class HomeController : Controller
     {

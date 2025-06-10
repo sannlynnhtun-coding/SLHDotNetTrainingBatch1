@@ -29,13 +29,32 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="/Budget/Create">Budget</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Expense/Create">Expense</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
+    
     <div class="container">
         <main role="main" class="pb-3">
+
+
+            @{
+                bool isSuccess = Convert.ToBoolean(TempData["IsSuccess"] ?? false);
+                string message = Convert.ToString(TempData["Message"] ?? string.Empty);
+            }
+            @if (!string.IsNullOrEmpty(message))
+            {
+                <div id="divAlert" class="alert alert-@(isSuccess ? "success" : "danger")" role="alert">
+                    @message
+                </div>
+            }
+            
             @RenderBody()
         </main>
     </div>

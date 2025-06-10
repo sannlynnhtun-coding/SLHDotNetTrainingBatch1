@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HomeBudget.Database.Entities;
+namespace HomeBudget.Database.Models;
 
 public partial class TblBudget
 {

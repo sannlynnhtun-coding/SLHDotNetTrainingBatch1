@@ -1,0 +1,30 @@
+﻿@model GetBudgetNameViewModel
+
+<h1>New Expense</h1>
+
+<form method="post" action="/Expense/Create">
+    <div class="mb-3">
+        <label for="ExpenseName" class="form-label">Expense Name</label>
+        <input type="text" name="Name" class="form-control" id="ExpenseName">
+    </div>
+
+    <div class="mb-3">
+
+        <label for="Amount" class="form-label">Amount</label>
+        <input type="text" name="Amount" class="form-control" id="Amount">
+    </div>
+
+    <select class="form-select form-select-sm mb-3" aria-label="Small select example" name="BudgetId">
+        <option selected>Open this select menu</option>
+
+        @foreach(var item in Model.Name)
+        {
+            <option value= "@item.BudgetId">@item.Name</option>
+        }
+      
+    </select>
+
+
+    <a href="/Budget/Index" type="button" class="btn btn-secondary">Cancel</a>
+    <button type="submit" class="btn btn-success" id="btnSave">Create</button>
+</form>

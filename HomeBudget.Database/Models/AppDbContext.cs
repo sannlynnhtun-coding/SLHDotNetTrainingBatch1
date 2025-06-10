@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace HomeBudget.Database.Entities;
+namespace HomeBudget.Database.Models;
 
 public partial class AppDbContext : DbContext
 {
@@ -19,8 +19,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<TblExpense> TblExpenses { get; set; }
 
-   
-
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TblBudget>(entity =>
@@ -40,8 +39,9 @@ public partial class AppDbContext : DbContext
 
             entity.ToTable("Tbl_Expense");
 
+            entity.Property(e => e.Amount).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-            entity.Property(e => e.ExpenseAmount).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.Name).HasMaxLength(50);
         });
 
         OnModelCreatingPartial(modelBuilder);
