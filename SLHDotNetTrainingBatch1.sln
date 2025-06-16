@@ -86,6 +86,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Mvc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.MvcApiExample.Database", "SLHDotNetTrainingBatch1.MvcApiExample.Database\SLHDotNetTrainingBatch1.MvcApiExample.Database.csproj", "{5A4A71A9-6367-490A-8DBC-EFBEBC57EDCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.LoggingExample", "SLHDotNetTrainingBatch1.LoggingExample\SLHDotNetTrainingBatch1.LoggingExample.csproj", "{7AF2D190-A1AF-42FD-958B-FA3B177D5552}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.SerilogExample", "SLHDotNetTrainingBatch1.SerilogExample\SLHDotNetTrainingBatch1.SerilogExample.csproj", "{515BC096-EDB5-4436-875F-EDD306CC29F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.SerilogExample2", "SLHDotNetTrainingBatch1.SerilogExample2\SLHDotNetTrainingBatch1.SerilogExample2.csproj", "{8B937FD8-9C6D-451A-A7AF-2273A5271987}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -212,6 +218,18 @@ Global
 		{5A4A71A9-6367-490A-8DBC-EFBEBC57EDCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A4A71A9-6367-490A-8DBC-EFBEBC57EDCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A4A71A9-6367-490A-8DBC-EFBEBC57EDCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AF2D190-A1AF-42FD-958B-FA3B177D5552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AF2D190-A1AF-42FD-958B-FA3B177D5552}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AF2D190-A1AF-42FD-958B-FA3B177D5552}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AF2D190-A1AF-42FD-958B-FA3B177D5552}.Release|Any CPU.Build.0 = Release|Any CPU
+		{515BC096-EDB5-4436-875F-EDD306CC29F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{515BC096-EDB5-4436-875F-EDD306CC29F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{515BC096-EDB5-4436-875F-EDD306CC29F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{515BC096-EDB5-4436-875F-EDD306CC29F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B937FD8-9C6D-451A-A7AF-2273A5271987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B937FD8-9C6D-451A-A7AF-2273A5271987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B937FD8-9C6D-451A-A7AF-2273A5271987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B937FD8-9C6D-451A-A7AF-2273A5271987}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
