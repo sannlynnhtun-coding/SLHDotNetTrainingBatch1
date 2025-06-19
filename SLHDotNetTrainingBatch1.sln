@@ -94,6 +94,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.SignalrExample", "SLHDotNetTrainingBatch1.SignalrExample\SLHDotNetTrainingBatch1.SignalrExample.csproj", "{0FF684AD-0BFB-4981-A744-402356364C18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.SignalrExample2", "SLHDotNetTrainingBatch1.SignalrExample2\SLHDotNetTrainingBatch1.SignalrExample2.csproj", "{F3993BD3-E193-479C-B861-70AD8CD7FBE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -236,6 +238,10 @@ Global
 		{0FF684AD-0BFB-4981-A744-402356364C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FF684AD-0BFB-4981-A744-402356364C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FF684AD-0BFB-4981-A744-402356364C18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3993BD3-E193-479C-B861-70AD8CD7FBE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3993BD3-E193-479C-B861-70AD8CD7FBE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3993BD3-E193-479C-B861-70AD8CD7FBE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3993BD3-E193-479C-B861-70AD8CD7FBE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
