@@ -114,6 +114,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.Pag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.PaginationExample.MvcApp", "SLHDotNetTrainingBatch1.PaginationExample.MvcApp\SLHDotNetTrainingBatch1.PaginationExample.MvcApp.csproj", "{90C7190B-45FB-449B-801E-B7457F690CE8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLHDotNetTrainingBatch1.MiddlewareExample", "SLHDotNetTrainingBatch1.MiddlewareExample\SLHDotNetTrainingBatch1.MiddlewareExample.csproj", "{8868E816-07EE-4ACE-BE47-FD5D5AA0F7FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -284,6 +286,10 @@ Global
 		{90C7190B-45FB-449B-801E-B7457F690CE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90C7190B-45FB-449B-801E-B7457F690CE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90C7190B-45FB-449B-801E-B7457F690CE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8868E816-07EE-4ACE-BE47-FD5D5AA0F7FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8868E816-07EE-4ACE-BE47-FD5D5AA0F7FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8868E816-07EE-4ACE-BE47-FD5D5AA0F7FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8868E816-07EE-4ACE-BE47-FD5D5AA0F7FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
